@@ -1,7 +1,3 @@
-<!-- INCLUDE TEMPLATE -->
-
-<!-- INCLUDE CONTENT -->
-
 <!-- TEMPLATE MASTER BARANG -->
 <div class="card">
     <div class="card-header">
@@ -71,4 +67,3 @@
     </div>
     <!-- /.card-body -->
 </div>
-<!-- AKHIR DARI INCLUDE CONTENT -->

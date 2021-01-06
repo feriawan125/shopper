@@ -95,3 +95,11 @@ function delete($namatabel, array $namakolom, array $isikolom, $pesanberhasil, $
         echo 'Caught exception: ',  $e->getMessage(), "\n";
     }
 }
+
+function select($query)
+{
+    global $conn;
+    $res = mysqli_query($conn, $query);
+
+    return $res;
+}

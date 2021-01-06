@@ -1,8 +1,3 @@
-<!-- INCLUDE TEMPLATE -->
-
-<!-- INCLUDE CONTENT -->
-
-
 <!-- TEMPLATE MASTER PENGGUNA -->
 <div class="card">
     <div class="card-header">
@@ -39,7 +34,9 @@
                         <tbody>
                             <?php ?>
                             <tr role="row" class="odd">
-                                <td tabindex="0" class="sorting_1"><?= $p['user_id']; ?></td>
+                                <td tabindex="0" class="sorting_1">
+                                    <? ?>
+                                </td>
                                 <td>
                                     <? ?>
                                 </td>
@@ -69,4 +66,3 @@
     </div>
     <!-- /.card-body -->
 </div>
-<!-- AKHIR DARI INCLUDE CONTENT -->
