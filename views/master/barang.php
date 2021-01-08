@@ -13,7 +13,7 @@
                 <div class="col-sm-2 col-md-2 row-md4">
                     <div class="dataTables_length" id="example1_length">
                         <br>
-                        <a href="" class="btn btn-block bg-gradient-primary text-white" style="float: left;width: 135px;">
+                        <a href="#" onclick="goToPage('master/create');" class="btn btn-block bg-gradient-primary text-white" style="float: left;width: 135px;">
                             Tambah
                         </a>
                     </div>
