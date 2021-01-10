@@ -1,4 +1,8 @@
 <?php include '../../config.php' ?>
+<?php 
+require '../../auth.php';
+Authentication::isAuth();
+?>
 <!-- TEMPLATE MASTER BARANG -->
 <div class="card">
     <div class="card-header">

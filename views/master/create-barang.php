@@ -1,3 +1,7 @@
+<?php 
+require '../../auth.php';
+Authentication::isAuth();
+?>
 <div class="card card-primary">
     <div class="card-header">
         <h3 class="card-title">Tambah Master Barang</h3>
