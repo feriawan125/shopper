@@ -13,7 +13,7 @@ $pesangagal = "Input Data Gagal!";
 // Insert user data into table
 insert("barang", $namakolom, $isikolom, $pesanberhasil, $pesangagal);
 if (isSuccess()) {
-    echo 'OK';
+    echo 'Input Data Berhasil!';
 } else {
     echo '';
 }

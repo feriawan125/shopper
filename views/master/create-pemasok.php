@@ -1,4 +1,3 @@
-<?php include_once '../../config.php' ?>
 <div class="card card-primary">
     <div class="card-header">
         <h3 class="card-title">Tambah Master Pemasok</h3>
@@ -6,7 +5,7 @@
 
     <!-- BODY -->
     <div class="card-body">
-        <form action="master/create-pemasok.php" class="form-horizontal" method="post">
+        <form id="formPemasok" action="" class="form-horizontal" method="post" autocomplete="off">
             <div class="card-body">
                 <div class="form-group row">
                     <label for="nama" class="col-sm-2 col-form-label">Nama</label>
@@ -46,26 +45,12 @@
                 </div>
             </div>
 
-            <!-- card footer -->
+            <!-- FOOTER -->
             <div class="card-footer">
-                <input type="submit" name="Submit" class="btn btn-info" value="Save">
+                <button type="submit" class="btn btn-primary" name="submit" id="submit">Save</button>
                 <a href="#" onclick="goToPage('master/pemasok');" class="btn btn-default float-right">Cancel</a>
             </div>
-
         </form>
-        <?php
-        if (isset($_POST['Submit'])) {
-            $namakolom = array("", "", "", "", "", "");
-            $isikolom = array();
-            $pesanberhasil = "Input Data Berhasil!";
-            $pesangagal = "Input Data Gagal!";
-
-            // include database connection file
-            include_once("../../config.php");
-
-            // Insert user data into table
-            insert("pemasok", $namakolom, $isikolom, $pesanberhasil, $pesangagal);
-        }
-        ?>
     </div>
 </div>
+<script src="../assets/js/createPemasok.js"></script>

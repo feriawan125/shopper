@@ -35,12 +35,10 @@ function insert($namatabel, array $namakolom, array $isikolom, $pesanberhasil, $
             }
         }
         $query = $query . ')';
-        echo $query;
+        // echo $query;
 
         if (mysqli_query($conn, $query)) {
-            echo $pesanberhasil;
         } else {
-            echo $pesangagal;
         }
     } catch (Exception $e) {
         echo 'Caught exception: ',  $e->getMessage(), "\n";

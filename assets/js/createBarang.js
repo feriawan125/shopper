@@ -8,7 +8,7 @@ formBarang.addEventListener("submit", (e) =>{
 
   xhr.onreadystatechange = function (){
     if (xhr.readyState == 4 && xhr.status == 200) {
-      if (xhr.responseText == 'OK') {
+      if (xhr.responseText == 'Input Data Berhasil!') {
         swal('Sukses', 'Data barang sukses dibuat', 'success'); 
         formBarang.reset();
       }else{

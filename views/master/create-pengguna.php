@@ -1,4 +1,3 @@
-<?php include_once '../../config.php' ?>
 <div class="card card-primary">
     <div class="card-header">
         <h3 class="card-title">Tambah Master Pengguna</h3>
@@ -6,7 +5,7 @@
 
     <!-- BODY -->
     <div class="card-body">
-        <form action="master/create-pengguna.php" class="form-horizontal" method="post">
+        <form id="formPengguna" action="" class="form-horizontal" method="post" autocomplete="off">
             <div class="card-body">
                 <div class="form-group row">
                     <label for="fullname" for="inputEmail3" class="col-sm-2 col-form-label">Nama Lengkap</label>
@@ -60,10 +59,10 @@
 
             <!-- FOOTER -->
             <div class="card-footer">
-                <input type="submit" name="Submit" class="btn btn-info" value="Save">
+                <button type="submit" class="btn btn-primary" name="submit" id="submit">Save</button>
                 <a href="#" onclick="goToPage('master/pengguna');" class="btn btn-default float-right">Cancel</a>
             </div>
-
         </form>
     </div>
 </div>
+<script src="../assets/js/createPengguna.js"></script>
