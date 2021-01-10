@@ -27,8 +27,15 @@ function insert($namatabel, array $namakolom, array $isikolom, $pesanberhasil, $
                 $temp = $temp . ',';
             }
         }
-        $query = $query + ') values ( ' . $temp . ')';
-        // echo $query;
+        $query = $query . ') values ( ';
+        for ($i = 0; $i < count($isikolom); $i++) {
+            $query = $query . '"' . $isikolom[$i] . '"';
+            if ($i < count($isikolom) - 1) {
+                $query = $query . ',';
+            }
+        }
+        $query = $query . ')';
+        echo $query;
 
         if (mysqli_query($conn, $query)) {
             echo $pesanberhasil;

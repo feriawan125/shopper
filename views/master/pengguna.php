@@ -13,7 +13,7 @@
                 <div class="col-sm-2 col-md-2 row-md4">
                     <div class="dataTables_length" id="example1_length">
                         <br>
-                        <a href="#" class="btn btn-block bg-gradient-primary text-white" style="float: left;width: 135px;" onclick="goToPage('');">
+                        <a href="#" onclick="goToPage('master/create-pengguna');" class="btn btn-block bg-gradient-primary text-white" style="float: left;width: 135px;" onclick="goToPage('');">
                             Tambah
                         </a>
                     </div>
@@ -81,8 +81,8 @@
                                     echo "<td>" . $row['Akses'] . "</td>";
                                     echo "<td>";
                                 ?>
-                                    <a href='' class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="goToPage('');">Edit</a>
-                                    <a href='' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="goToPage('');">Delete</a>
+                                    <a href='#' class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="goToPage('master/edit-pengguna');">Edit</a>
+                                    <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="goToPage('master/delete-pengguna');">Delete</a>
                                 <?php
                                     echo "</td></tr>";
                                 }

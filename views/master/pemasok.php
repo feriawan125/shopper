@@ -13,7 +13,7 @@
                 <div class="col-sm-2 col-md-2 row-md4">
                     <div class="dataTables_length" id="example1_length">
                         <br>
-                        <a href="" class="btn btn-block bg-gradient-primary text-white" style="float: left;width: 135px;">
+                        <a href="#" onclick="goToPage('master/create-pemasok');" class="btn btn-block bg-gradient-primary text-white" style="float: left;width: 135px;">
                             Tambah
                         </a>
                     </div>
@@ -76,8 +76,8 @@
                                     echo "<td class='text-right'>" . $row['Telepon Pemasok'] . "</td>";
                                     echo "<td>";
                                 ?>
-                                    <a href='' class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="goToPage('');">Edit</a>
-                                    <a href='' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="goToPage('');">Delete</a>
+                                    <a href='#' class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="goToPage('master/edit-pemasok');">Edit</a>
+                                    <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="goToPage('master/delete-pemasok');">Delete</a>
                                 <?php
                                     echo "</td></tr>";
                                 }
