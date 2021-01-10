@@ -110,3 +110,13 @@ function select($query)
 
     return $res;
 }
+
+function isSuccess()
+{
+    global $conn;
+    if (mysqli_affected_rows($conn) > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
