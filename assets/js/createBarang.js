@@ -17,7 +17,7 @@ formBarang.addEventListener("submit", (e) =>{
     }
   }
 
-  xhr.open("post", "../ajax/createBarang.php");
+  xhr.open("post", "../assets/ajax/createBarang.php");
   xhr.send(formData);
 
 

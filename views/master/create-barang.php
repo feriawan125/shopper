@@ -78,4 +78,4 @@
         </form>
     </div>
 </div>
-<script src="../../assets/js/createBarang.js"></script>
+<script src="../assets/js/createBarang.js"></script>
