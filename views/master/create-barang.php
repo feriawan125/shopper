@@ -5,7 +5,7 @@
 
     <!-- BODY -->
     <div class="card-body">
-        <form action="master/create-barang.php" class="form-horizontal" method="post">
+        <form id="formBarang" action="" class="form-horizontal" method="post" autocomplete="off">
             <div class="card-body">
                 <div class="form-group row">
                     <label for="nama" class="col-sm-2 col-form-label">Nama</label>
@@ -72,24 +72,10 @@
 
             <!-- FOOTER -->
             <div class="card-footer">
-                <input type="submit" name="Submit" class="btn btn-info" value="Save">
+                <button type="submit" class="btn btn-primary" name="submit" id="submit">Save</button>
                 <a href="#" onclick="goToPage('master/barang');" class="btn btn-default float-right">Cancel</a>
             </div>
         </form>
-
-        <?php
-        if (isset($_POST['Submit'])) {
-            $namakolom = array("NamaBarang", "StokBarang", "HargaBeli", "HargaJual", "Slug", "CreatedAt");
-            $isikolom = array($_POST['nama'], $_POST['stok-barang'], $_POST['harga-beli'], $_POST['harga-jual'], $_POST['slug'], date("Y-m-d h:i:s"));
-            $pesanberhasil = "Input Data Berhasil!";
-            $pesangagal = "Input Data Gagal!";
-
-            // include database connection file
-            include_once("../../config.php");
-
-            // Insert user data into table
-            insert("barang", $namakolom, $isikolom, $pesanberhasil, $pesangagal);
-        }
-        ?>
     </div>
 </div>
+<script src="../../assets/js/createBarang.js"></script>

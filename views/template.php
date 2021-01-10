@@ -158,6 +158,7 @@
     </div>
 
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- AJAX -->
     <script src="../assets/js/script.js"></script>
     <!-- jQuery UI 1.11.4 -->
