@@ -1,6 +1,7 @@
 <?php 
 require '../../auth.php';
 Authentication::isAuth();
+Authentication::isAdmin();
 ?>
 <div class="card card-primary">
     <div class="card-header">

@@ -2,6 +2,7 @@
 <?php 
 require '../../auth.php';
 Authentication::isAuth();
+Authentication::isAdmin();
 ?>
 <!-- TEMPLATE MASTER BARANG -->
 <div class="card">

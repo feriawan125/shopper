@@ -12,7 +12,6 @@
     }
     $role = Authentication::getUserRole($_COOKIE['token']);
     $fname = Authentication::getUserFname($_COOKIE['token']);
-    echo "<script> console.log($role) </script>"
 
 
 ?>

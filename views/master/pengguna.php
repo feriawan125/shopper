@@ -1,4 +1,9 @@
-<?php include '../../config.php' ?>
+<?php
+require_once '../../auth.php';
+include '../../config.php' ;
+Authentication::isAuth();
+Authentication::isAdmin();
+?>
 <!-- TEMPLATE MASTER PENGGUNA -->
 <div class="card">
     <div class="card-header">

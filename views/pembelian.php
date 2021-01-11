@@ -1,3 +1,11 @@
+<?php 
+
+require_once '../auth.php';
+// include database connection file
+Authentication::isAuth();
+Authentication::isStaff();
+?>
+
 <!-- TEMPLATE MASTER BARANG -->
 <section class="content-header">
     <div class="container-fluid">

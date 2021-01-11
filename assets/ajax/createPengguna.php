@@ -1,6 +1,10 @@
 <?php
 // include database connection file
+require_once '../../auth.php';
 include_once("../../config.php");
+Authentication::isAuth();
+Authentication::isAdmin();
+
 
 $namakolom = array("full_name", "username", "password_hash", "email", "phone", "role");
 $isikolom = array(
@@ -17,3 +21,4 @@ if (isSuccess()) {
 } else {
     echo '';
 }
+?>

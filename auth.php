@@ -11,11 +11,16 @@ class Authentication
   //   $this->key = "Auxxl2PMzx4AIQ8NxIQa3Tf8WGmTLl6B0n45sdkGqSveXYmUBMGJNuqWUKFErDr";
   // }
 
+  public static function decodeToken($token)
+  {
+    $decoded = JWT::decode($token, self::$key, array('HS256'));
+    $decoded_array = (array) $decoded;
+    return $decoded_array;
+  }
   public static function validateToken($token)
   {
     try {
-      $decoded = JWT::decode($token, self::$key, array('HS256'));
-      $decoded_array = (array) $decoded;
+      $decoded_array = self::decodeToken($token);
       if (!empty($decoded_array['uid'])) {
         return true;
       }
@@ -59,16 +64,31 @@ class Authentication
     
   }
   public static function getUserRole($token){
-    $decoded = JWT::decode($token, self::$key, array('HS256'));
-    $decoded_array = (array) $decoded;
+    $decoded_array = self::decodeToken($token);
     $role = $decoded_array['role'];
     return $role;
   }
   public static function getUserFname($token){
-    $decoded = JWT::decode($token, self::$key, array('HS256'));
-    $decoded_array = (array) $decoded;
+    $decoded_array = self::decodeToken($token);
     $fname = $decoded_array['name'];
     return $fname;
+  }
+  public static function isAdmin()
+  {
+    $token = $_COOKIE['token'];
+    if (self::getUserRole($token) != 'admin') {
+      die("Forbidden Access!!");
+    }
+  }
+  public static function isStaff()
+  {
+    $token = $_COOKIE['token'];
+    $role = self::getUserRole($token);
+    echo "<script> console.log('$role') </script>";
+    if (self::getUserRole($token) == 'staff' || self::getUserRole($token) == 'admin') {
+    }else{
+      die("Forbidden Access!!");
+    }
   }
 
 }
