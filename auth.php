@@ -11,7 +11,7 @@ class Authentication
   //   $this->key = "Auxxl2PMzx4AIQ8NxIQa3Tf8WGmTLl6B0n45sdkGqSveXYmUBMGJNuqWUKFErDr";
   // }
 
-  public static function decodeToken($token)
+  private static function decodeToken($token)
   {
     $decoded = JWT::decode($token, self::$key, array('HS256'));
     $decoded_array = (array) $decoded;
@@ -86,6 +86,16 @@ class Authentication
     $role = self::getUserRole($token);
     echo "<script> console.log('$role') </script>";
     if (self::getUserRole($token) == 'staff' || self::getUserRole($token) == 'admin') {
+    }else{
+      die("Forbidden Access!!");
+    }
+  }
+  public static function isKasir()
+  {
+    $token = $_COOKIE['token'];
+    $role = self::getUserRole($token);
+    echo "<script> console.log('$role') </script>";
+    if (self::getUserRole($token) == 'kasir' || self::getUserRole($token) == 'staff' || self::getUserRole($token) == 'admin') {
     }else{
       die("Forbidden Access!!");
     }
