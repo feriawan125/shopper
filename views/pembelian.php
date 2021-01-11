@@ -40,7 +40,7 @@ Authentication::isStaff();
                             </div>
                             <div class="form-group row">
                                 <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
-                                <div class="col-sm-3">
+                                <div class="col-sm-4">
                                     <input type="date" class="form-control" id="" name="">
                                 </div>
                             </div>
