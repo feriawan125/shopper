@@ -1,5 +1,6 @@
 <?php 
 require __DIR__ . '/vendor/autoload.php';
+require 'config.php';
 use \Firebase\JWT\JWT;
 
 class Authentication
@@ -29,7 +30,7 @@ class Authentication
 
     }
   }
-  public static function getToken()
+  public static function getToken($role)
   {
     $iat = time();
     $exp = $iat + 3600*24;
@@ -37,7 +38,8 @@ class Authentication
     $payload = array(
       'uid' => $uid,
       'iat' => $iat,
-      'exp' => $exp
+      'exp' => $exp,
+      'role'=> $role
     );
     $jwt = JWT::encode($payload, self::$key);
     return $jwt;
@@ -55,6 +57,11 @@ class Authentication
       die("Forbidden Access!!");
     }
     
+  }
+  public static function getUserRole(){
+    $decoded = JWT::decode($token, self::$key, array('HS256'));
+    $decoded_array = (array) $decoded;
+    re
   }
 
 }

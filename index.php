@@ -10,7 +10,7 @@ if (isset($_POST['login'])) {
     $hashed_pass = $res['password_hash'];
     if(password_verify($password, $hashed_pass)){
     }
-    $token = Authentication::getToken();
+    $token = Authentication::getToken($res['role']);
     setcookie('token', $token, time() + (86400), "/");
     header("location: views/template.php");
 
