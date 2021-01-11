@@ -29,16 +29,17 @@ class Authentication
 
     }
   }
-  public static function getToken($role)
+  public static function getToken($uid, $role, $fname)
   {
     $iat = time();
     $exp = $iat + 3600*24;
-    $uid = 1;
     $payload = array(
       'uid' => $uid,
       'iat' => $iat,
       'exp' => $exp,
-      'role'=> $role
+      'role'=> $role,
+      'name'=> $fname
+
     );
     $jwt = JWT::encode($payload, self::$key);
     return $jwt;
@@ -57,11 +58,17 @@ class Authentication
     }
     
   }
-  public static function getUserRole(){
+  public static function getUserRole($token){
     $decoded = JWT::decode($token, self::$key, array('HS256'));
     $decoded_array = (array) $decoded;
     $role = $decoded_array['role'];
-    return role;
+    return $role;
+  }
+  public static function getUserFname($token){
+    $decoded = JWT::decode($token, self::$key, array('HS256'));
+    $decoded_array = (array) $decoded;
+    $fname = $decoded_array['name'];
+    return $fname;
   }
 
 }

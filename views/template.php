@@ -2,11 +2,19 @@
     require '../auth.php';
     if (isset($_COOKIE['token'])) {
         if(!Authentication::validateToken($_COOKIE['token'])){
-            die("Invalid Token!!");
+            // die("Invalid Token!!");
+            header("location: ../");
+            exit();
         }   
     }else{
         header("location: ../");
+        exit();
     }
+    $role = Authentication::getUserRole($_COOKIE['token']);
+    $fname = Authentication::getUserFname($_COOKIE['token']);
+    echo "<script> console.log($role) </script>"
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,11 +65,11 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        <h6>Nama User</h6>
+                        <h6><?=$fname?></h6>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item" onclick="goToPage('');">
+                        <a href="../logout.php" class="dropdown-item" onclick="goToPage('');">
                             <p>Logout</p>
                         </a>
                     </div>
@@ -83,6 +91,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
+                        <?php if($role == 'admin'): ?>
                         <!-- MASTER DROPDOWN -->
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
@@ -110,7 +119,9 @@
                                 </li>
                             </ul>
                         </li>
+                        <?php endif; ?>
 
+                        <?php if($role == 'admin' || $role == 'staff'): ?>
                         <!-- PEMBELIAN -->
                         <li class="nav-item">
                             <a href="#" class="nav-link" onclick="goToPage('pembelian');">
@@ -130,6 +141,9 @@
                                 </p>
                             </a>
                         </li>
+                        <?php endif; ?>
+
+                        <?php if($role == 'admin' || $role == 'staff' || $role == 'kasir'): ?>
                         <!-- PENJUALAN -->
                         <li class="nav-item">
                             <a href="#" class="nav-link" onclick="goToPage('penjualan');">
@@ -139,7 +153,9 @@
                                 </p>
                             </a>
                         </li>
-                        
+                        <?php endif; ?>
+
+
                     </ul>
                 </nav>
 

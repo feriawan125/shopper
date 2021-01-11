@@ -4,13 +4,13 @@ require 'auth.php';
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $query = "SELECT user_id, email, username, role, password_hash FROM users WHERE email = '$email'";
+    $query = "SELECT user_id, full_name, email, username, role, password_hash FROM users WHERE email = '$email'";
     $res = select($query);
     $res = mysqli_fetch_assoc($res);
     $hashed_pass = $res['password_hash'];
     if(password_verify($password, $hashed_pass)){
     }
-    $token = Authentication::getToken($res['role']);
+    $token = Authentication::getToken($res['user_id'], $res['role'], $res['full_name']);
     setcookie('token', $token, time() + (86400), "/");
     header("location: views/template.php");
 
