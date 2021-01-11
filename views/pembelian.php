@@ -27,8 +27,8 @@ Authentication::isStaff();
                     <div class="row invoice-info">
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="nogenerate" class="col-sm-2 col-form-label">No Generate</label>
-                                <div class="col-sm-4">
+                                <label for="nogenerate" class="col-lg-2 col-form-label">No Generate</label>
+                                <div class="col-lg-4">
                                     <input type="text" class="form-control" id="" name="" placeholder="No Generate">
                                 </div>
                             </div>
@@ -55,19 +55,19 @@ Authentication::isStaff();
                             <div class="form-group row">
                                 <label for="pemasok" class="col-sm-2 col-form-label">Pemasok</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" id="" name="" placeholder="Kode">
+                                    <input type="text" class="form-control" id="idPemasok" name="" placeholder="Kode" disabled>
                                 </div>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="" name="" placeholder="Nama">
+                                    <input type="text" class="form-control" id="namaPemasok" name="" placeholder="Nama" disabled>
                                 </div>
                                 <div class="col-sm-2">
-                                    <button type="button" class="btn btn-block bg-gradient-secondary" data-toggle="modal" data-target="#modal-pemasok">Cari</button>
+                                    <button type="button" class="btn btn-block bg-gradient-secondary" data-toggle="modal" data-target="#modal-pemasok" onclick="getPemasok()">Cari</button>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                                 <div class="col-sm-6">
-                                    <textarea id="w3review" class="form-control" id="" name="" rows="4" cols="50"></textarea>
+                                    <textarea class="form-control" id="alamatPemasok" name="" rows="4" cols="50" disabled></textarea>
                                 </div>
                             </div>
                         </div>
@@ -287,11 +287,10 @@ Authentication::isStaff();
 
             <div class="modal-body">
                 <!-- CONTENT HERE -->
+                <div id="tabelPemasok"></div>
             </div>
 
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -403,3 +402,4 @@ Authentication::isStaff();
         </div>
     </div>
 </div>
+<script src="../assets/js/pembelian.js"></script>

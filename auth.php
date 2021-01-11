@@ -89,7 +89,6 @@ class Authentication
   {
     $token = $_COOKIE['token'];
     $role = self::getUserRole($token);
-    echo "<script> console.log('$role') </script>";
     if (self::getUserRole($token) == 'staff' || self::getUserRole($token) == 'admin') {
     }else{
       die("Forbidden Access!!");
