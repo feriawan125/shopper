@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 06, 2021 at 04:36 PM
--- Server version: 10.4.10-MariaDB
--- PHP Version: 7.3.12
+-- Host: localhost
+-- Generation Time: Jan 11, 2021 at 11:03 PM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `barang` (
   `KodeBarang` int(11) NOT NULL,
   `NamaBarang` varchar(100) NOT NULL,
-  `StokBarang` int(11) NOT NULL DEFAULT 0,
+  `StokBarang` int(11) NOT NULL DEFAULT '0',
   `HargaBeli` double NOT NULL,
   `HargaJual` double NOT NULL,
   `CreatedAt` datetime DEFAULT NULL,
@@ -45,7 +45,10 @@ CREATE TABLE `barang` (
 
 INSERT INTO `barang` (`KodeBarang`, `NamaBarang`, `StokBarang`, `HargaBeli`, `HargaJual`, `CreatedAt`, `UpdatedAt`, `Slug`) VALUES
 (10, 'Le Minerale 600ML ', 0, 2500, 3000, '2020-11-28 02:36:19', '2020-11-28 05:48:44', 'minerale600'),
-(12, 'Aqua 600ML', 0, 2000, 3000, '2020-11-29 06:32:44', '2020-11-29 06:32:44', 'aqua600');
+(12, 'Aqua 600ML', 0, 2000, 3000, '2020-11-29 06:32:44', '2020-11-29 06:32:44', 'aqua600'),
+(13, '', 0, 0, 0, '2021-01-10 02:52:42', NULL, ''),
+(16, 'abcd', 0, 12, 15, '2021-01-10 03:50:49', NULL, 'ewewq'),
+(18, 'qwewqe', 0, 123232, 21321, '2021-01-10 04:01:41', NULL, 'wqewqewqe');
 
 -- --------------------------------------------------------
 
@@ -187,7 +190,7 @@ CREATE TABLE `users` (
   `full_name` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone` varchar(15) NOT NULL,
-  `role` varchar(10) NOT NULL DEFAULT 'Staff',
+  `role` varchar(15) NOT NULL DEFAULT 'unauthorized',
   `username` varchar(30) DEFAULT NULL,
   `password_hash` varchar(255) NOT NULL,
   `reset_hash` varchar(255) DEFAULT NULL,
@@ -196,7 +199,7 @@ CREATE TABLE `users` (
   `activate_hash` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `status_message` varchar(255) DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT 0,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
   `force_pass_reset` tinyint(1) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
@@ -208,7 +211,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `full_name`, `email`, `phone`, `role`, `username`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(16, 'Dimas Febrian', 'dimas99fe@gmail.com', '0811332778', 'admin', 'dimas99fe', '$2y$10$5fBvsH3nUBVtqL2oTTgiE.nPe7S3jyQek3G2b7y8AAYIAqEn9.tlS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2020-12-21 07:27:46', '2020-12-21 07:27:46', NULL);
+(16, 'Dimas Febrian', 'dimas99fe@gmail.com', '0811332778', 'admin', 'dimas99fe', '$2y$10$5fBvsH3nUBVtqL2oTTgiE.nPe7S3jyQek3G2b7y8AAYIAqEn9.tlS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2020-12-21 07:27:46', '2020-12-21 07:27:46', NULL),
+(18, 'Feriawan Taniwidjaja', 'ferimario6@gmail.com', '081283663278', 'staff', NULL, '$2y$10$1yQzBpI4yu5JMcJe2KwJW.H2csY9IhLFrCdnOotsHEFDzswIWwsrG', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -294,7 +298,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `KodeBarang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `KodeBarang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `dretur`
@@ -324,13 +328,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pemasok`
 --
 ALTER TABLE `pemasok`
-  MODIFY `KodePemasok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `KodePemasok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
