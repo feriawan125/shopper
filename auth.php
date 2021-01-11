@@ -68,9 +68,14 @@ class Authentication
     $role = $decoded_array['role'];
     return $role;
   }
-  public static function getUserFname($token){
-    $decoded_array = self::decodeToken($token);
+  public static function getUserFname(){
+    $decoded_array = self::decodeToken($_COOKIE['token']);
     $fname = $decoded_array['name'];
+    return $fname;
+  }
+  public static function getUid(){
+    $decoded_array = self::decodeToken($_COOKIE['token']);
+    $fname = $decoded_array['uid'];
     return $fname;
   }
   public static function isAdmin()

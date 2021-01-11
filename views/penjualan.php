@@ -1,3 +1,7 @@
+<?php 
+require_once '../auth.php';
+?>
+
 <!-- TEMPLATE MASTER BARANG -->
 <section class="content-header">
     <div class="container-fluid">
@@ -21,13 +25,13 @@
                             <div class="form-group row">
                                 <label for="nogenerate" class="col-sm-2 col-form-label">No Nota</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="" name="" placeholder="No Generate">
+                                    <input type="text" class="form-control" id="" name="" placeholder="No Generate" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
                                 <div class="col-sm-4">
-                                    <input type="date" class="form-control" id="" name="">
+                                    <input type="date" class="form-control" id="datePicker" name="" >
                                 </div>
                             </div>
                         </div>
@@ -39,10 +43,10 @@
                             <div class="form-group row">
                                 <label for="nogenerate" class="col-sm-2 col-form-label">Operator</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" id="" name="" placeholder="Kode">
+                                    <input type="text" class="form-control" id="" name="" value="<?=Authentication::getUid()?>" disabled>
                                 </div>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="" name="" placeholder="Nama">
+                                    <input type="text" class="form-control" id="" name="" value="<?=Authentication::getUserFname()?>" disabled>
                                 </div>
                             </div>
                         </div>
@@ -372,3 +376,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    Date.prototype.toDateInputValue = (function() {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0,10);
+    });
+    document.getElementById('datePicker').value = new Date().toDateInputValue();
+
+</script>

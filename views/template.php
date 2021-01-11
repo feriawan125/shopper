@@ -11,7 +11,6 @@
         exit();
     }
     $role = Authentication::getUserRole($_COOKIE['token']);
-    $fname = Authentication::getUserFname($_COOKIE['token']);
 
 
 ?>
@@ -64,7 +63,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        <h6><?=$fname?></h6>
+                        <h6><?=Authentication::getUserFname()?></h6>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
