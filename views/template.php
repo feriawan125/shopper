@@ -1,3 +1,13 @@
+<?php 
+    require '../auth.php';
+    if (isset($_COOKIE['token'])) {
+        if(!Authentication::validateToken($_COOKIE['token'])){
+            die("Invalid Token!!");
+        }   
+    }else{
+        header("location: ../");
+    }
+?>
 <!DOCTYPE html>
 <html>
 

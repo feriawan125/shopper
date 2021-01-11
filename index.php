@@ -1,3 +1,22 @@
+<?php 
+include_once 'config.php';
+require 'auth.php';
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $query = "SELECT user_id, email, username, role, password_hash FROM users WHERE email = '$email'";
+    $res = select($query);
+    $res = mysqli_fetch_assoc($res);
+    $hashed_pass = $res['password_hash'];
+    if(password_verify($password, $hashed_pass)){
+    }
+    $token = Authentication::getToken();
+    setcookie('token', $token, time() + (86400), "/");
+    header("location: views/template.php");
+
+
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -41,9 +60,9 @@
                     <h3>Login</h3>
                 </div>
                 <div class="card-body login-card-body">
-                    <form action="../../index3.html" method="post">
+                    <form action="" method="post">
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control" placeholder="Email">
+                            <input type="email" name="email" class="form-control" placeholder="Email">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -51,7 +70,7 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" name="password" class="form-control" placeholder="Password">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
@@ -69,9 +88,9 @@
                             </div>
 
                             <div class="col-4">
-                                <a href="#" class="btn btn-primary btn-block" onclick="">
+                                <button type="submit" name="login" href="#" class="btn btn-primary btn-block" onclick="">
                                     Sign In
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -129,6 +148,13 @@
     <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script>
+        function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+    </script>
 </body>
 
 </html>

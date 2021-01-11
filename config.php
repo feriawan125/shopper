@@ -36,6 +36,7 @@ function insert($namatabel, array $namakolom, array $isikolom, $pesanberhasil, $
         }
         $query = $query . ')';
         // echo $query;
+        // return $query;
 
         if (mysqli_query($conn, $query)) {
         } else {

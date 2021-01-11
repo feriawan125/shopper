@@ -34,8 +34,14 @@ function goToPage(page){
       }
     }
     
-    xhr.open('GET', page+'.php', true);
+    xhr.open('POST', page+'.php', true);
+    xhr.setRequestHeader('token', getCookie('token'));
     xhr.send();
     return;
   
-  }
+}
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}

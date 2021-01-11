@@ -4,7 +4,7 @@ use \Firebase\JWT\JWT;
 
 class Authentication
 {
-  private static $key = "Auxxl2PMzx4AIQ8NxIQa3Tf8WGmTLl6B0n45sdkGqSveXYmUBMGJNuqWUKFErDr" ;
+  private static $key = "2B74521E1419CF192CDAAE8A75A45B648D6BC0613C9F88E851F2FA38695D19B97832589E41CD1CC4ECB91B06B62A036B2BA738EE8E2D876D8FE729DA575D0C07" ;
   
   // function __construct()
   // {
@@ -32,7 +32,7 @@ class Authentication
   public static function getToken()
   {
     $iat = time();
-    $exp = $iat + 3600;
+    $exp = $iat + 3600*24;
     $uid = 1;
     $payload = array(
       'uid' => $uid,
