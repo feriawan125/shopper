@@ -1,6 +1,5 @@
 <?php 
 require __DIR__ . '/vendor/autoload.php';
-require 'config.php';
 use \Firebase\JWT\JWT;
 
 class Authentication
@@ -61,7 +60,8 @@ class Authentication
   public static function getUserRole(){
     $decoded = JWT::decode($token, self::$key, array('HS256'));
     $decoded_array = (array) $decoded;
-    re
+    $role = $decoded_array['role'];
+    return role;
   }
 
 }

@@ -121,16 +121,6 @@
                             </a>
                         </li>
 
-                        <!-- PENJUALAN -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" onclick="goToPage('penjualan');">
-                                <i class="nav-icon fas fa-shopping-bag"></i>
-                                <p>
-                                    Penjualan
-                                </p>
-                            </a>
-                        </li>
-
                         <!-- RETUR -->
                         <li class="nav-item">
                             <a href="#" class="nav-link" onclick="goToPage('retur');">
@@ -140,6 +130,16 @@
                                 </p>
                             </a>
                         </li>
+                        <!-- PENJUALAN -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" onclick="goToPage('penjualan');">
+                                <i class="nav-icon fas fa-shopping-bag"></i>
+                                <p>
+                                    Penjualan
+                                </p>
+                            </a>
+                        </li>
+                        
                     </ul>
                 </nav>
 
