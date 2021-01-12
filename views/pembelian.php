@@ -287,7 +287,7 @@ Authentication::isStaff();
 
             <div class="modal-body">
                 <!-- CONTENT HERE -->
-                <div id="tabelPemasok"></div>
+                <div class="table-responsive" id="tabelPemasok"></div>
             </div>
 
             <div class="modal-footer justify-content-between">

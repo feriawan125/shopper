@@ -7,6 +7,9 @@ function getPemasok() {
       var myList =JSON.parse(xhr.responseText);
       let selector = document.getElementById("tabelPemasok");
       selector.innerHTML = json2Table(myList);
+      $(function() {
+        $('#dataTable').DataTable();
+      });
     }
   }
 
@@ -39,7 +42,7 @@ function json2Table(json) {
 
   //build the table
   const table = `
-	<table border="1">
+	<table class="table table-striped" id="dataTable">
 		<thead>
 			<tr>${headerRow}</tr>
 		<thead>
@@ -47,6 +50,7 @@ function json2Table(json) {
 			${rows}
 		<tbody>
 	<table>`;
+
 
   return table;
 }
