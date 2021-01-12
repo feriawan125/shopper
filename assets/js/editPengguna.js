@@ -1,5 +1,5 @@
-function editBarang(id) {
-    var tabelBarang = document.getElementById('tabelBarang');
+function editPengguna(id) {
+    var tabelBarang = document.getElementById('tabelPengguna');
     var divKosong = document.getElementById('divKosong');
     tabelBarang.style.display = "none";
     divKosong.style.display = "block";
@@ -12,6 +12,6 @@ function editBarang(id) {
       }
     }
     
-    xhr.open('GET', '../views/master/edit-barang.php?kode=' + id, true);
+    xhr.open('GET', '../views/master/edit-pengguna.php?kode=' + id, true);
     xhr.send();
 }

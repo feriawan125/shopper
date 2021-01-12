@@ -10,7 +10,7 @@ Authentication::isAdmin();
         <h3 class="card-title">Master Pemasok</h3>
     </div>
 
-    <div class="card-body">
+    <div id="tabelPemasok" class="card-body">
         <!-- UP THE TABLE -->
         <div class="row">
             <!-- BUTTON TAMBAH DATA -->
@@ -52,7 +52,7 @@ Authentication::isAdmin();
                                 <td class='text-left'> <?= $row['Alamat Pemasok'] ?></td>
                                 <td class='text-right'> <?= $row['Telepon Pemasok'] ?></td>
                                 <td>
-                                    <button type="submit" class='btn btn-block bg-gradient-warning btn-xs text-white'>Edit</button>
+                                    <a class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="editPemasok('<?= $row['Kode Pemasok'] ?>')">Edit</a>
                                     <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="goToPage('master/delete-barang');">Delete</a>
                                 </td>
                             </tr>
@@ -62,6 +62,7 @@ Authentication::isAdmin();
             </div>
         </div>
     </div>
+    <div id="divKosong"></div>
 </div>
 
 <script>
@@ -69,3 +70,5 @@ Authentication::isAdmin();
         $('#dataTable').DataTable();
     });
 </script>
+<script src="../assets/js/editPemasok.js"></script>
+<script src="../assets/js/deletePemasok.js"></script>

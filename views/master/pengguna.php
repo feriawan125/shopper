@@ -10,7 +10,7 @@ Authentication::isAdmin();
         <h3 class="card-title">Master Pengguna</h3>
     </div>
 
-    <div class="card-body">
+    <div id="tabelPengguna" class="card-body">
         <!-- UP THE TABLE -->
         <div class="row">
             <!-- BUTTON TAMBAH DATA -->
@@ -56,7 +56,7 @@ Authentication::isAdmin();
                                 <td class='text-right'> <?= $row['Telepon'] ?></td>
                                 <td> <?= $row['Akses'] ?></td>
                                 <td>
-                                    <button type="submit" class='btn btn-block bg-gradient-warning btn-xs text-white'>Edit</button>
+                                    <a class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="editPengguna('<?= $row['Kode Pengguna'] ?>')">Edit</a>
                                     <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="goToPage('master/delete-barang');">Delete</a>
                                 </td>
                             </tr>
@@ -66,9 +66,12 @@ Authentication::isAdmin();
             </div>
         </div>
     </div>
+    <div id="divKosong"></div>
 </div>
 <script>
     $(function() {
         $('#dataTable').DataTable();
     });
 </script>
+<script src="../assets/js/editPengguna.js"></script>
+<script src="../assets/js/deletePengguna.js"></script>

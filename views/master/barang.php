@@ -58,7 +58,7 @@ Authentication::isAdmin();
                                 <td class='text-right'> <?= $row['Harga Jual'] ?></td>
                                 <td>
                                     <a class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="editBarang('<?= $row['Kode Barang'] ?>')">Edit</a>
-                                    <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white'onclick="deleteBarang('<?= $row['Kode Barang'] ?>')">Delete</a>
+                                    <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="deleteBarang('<?= $row['Kode Barang'] ?>')">Delete</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -66,8 +66,6 @@ Authentication::isAdmin();
                 </table>
             </div>
         </div>
-
-        <span id="hasil"></span>
     </div>
     <div id="divKosong"></div>
 </div>

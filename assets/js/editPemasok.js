@@ -1,5 +1,5 @@
-function editBarang(id) {
-    var tabelBarang = document.getElementById('tabelBarang');
+function editPemasok(id) {
+    var tabelBarang = document.getElementById('tabelPemasok');
     var divKosong = document.getElementById('divKosong');
     tabelBarang.style.display = "none";
     divKosong.style.display = "block";
@@ -12,6 +12,6 @@ function editBarang(id) {
       }
     }
     
-    xhr.open('GET', '../views/master/edit-barang.php?kode=' + id, true);
+    xhr.open('GET', '../views/master/edit-pemasok.php?kode=' + id, true);
     xhr.send();
 }
