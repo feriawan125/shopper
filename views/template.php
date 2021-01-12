@@ -1,16 +1,16 @@
-<?php 
-    require '../auth.php';
-    if (isset($_COOKIE['token'])) {
-        if(!Authentication::validateToken($_COOKIE['token'])){
-            // die("Invalid Token!!");
-            header("location: ../");
-            exit();
-        }   
-    }else{
+<?php
+require '../auth.php';
+if (isset($_COOKIE['token'])) {
+    if (!Authentication::validateToken($_COOKIE['token'])) {
+        // die("Invalid Token!!");
         header("location: ../");
         exit();
     }
-    $role = Authentication::getUserRole($_COOKIE['token']);
+} else {
+    header("location: ../");
+    exit();
+}
+$role = Authentication::getUserRole($_COOKIE['token']);
 
 
 ?>
@@ -63,7 +63,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        <h6><?=Authentication::getUserFname()?></h6>
+                        <h6><?= Authentication::getUserFname() ?></h6>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -89,68 +89,68 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                        <?php if($role == 'admin'): ?>
-                        <!-- MASTER DROPDOWN -->
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-plus-square"></i>
-                                <p>
-                                    Master
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link" onclick="goToPage('master/barang');">
-                                        <p>Barang</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link" onclick="goToPage('master/pengguna');">
-                                        <p>Pengguna</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link" onclick="goToPage('master/pemasok');">
-                                        <p>Pemasok</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <?php if ($role == 'admin') : ?>
+                            <!-- MASTER DROPDOWN -->
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon far fa-plus-square"></i>
+                                    <p>
+                                        Master
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link" onclick="goToPage('master/barang');">
+                                            <p>Barang</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link" onclick="goToPage('master/pengguna');">
+                                            <p>Pengguna</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link" onclick="goToPage('master/pemasok');">
+                                            <p>Pemasok</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                         <?php endif; ?>
 
-                        <?php if($role == 'admin' || $role == 'staff'): ?>
-                        <!-- PEMBELIAN -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" onclick="goToPage('pembelian');">
-                                <i class="nav-icon fas fa-shopping-cart"></i>
-                                <p>
-                                    Pembelian
-                                </p>
-                            </a>
-                        </li>
+                        <?php if ($role == 'admin' || $role == 'staff') : ?>
+                            <!-- PEMBELIAN -->
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" onclick="goToPage('pembelian');">
+                                    <i class="nav-icon fas fa-shopping-cart"></i>
+                                    <p>
+                                        Pembelian
+                                    </p>
+                                </a>
+                            </li>
 
-                        <!-- RETUR -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" onclick="goToPage('retur');">
-                                <i class="nav-icon fas fa-inbox"></i>
-                                <p>
-                                    Retur
-                                </p>
-                            </a>
-                        </li>
+                            <!-- RETUR -->
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" onclick="goToPage('retur');">
+                                    <i class="nav-icon fas fa-inbox"></i>
+                                    <p>
+                                        Retur
+                                    </p>
+                                </a>
+                            </li>
                         <?php endif; ?>
 
-                        <?php if($role == 'admin' || $role == 'staff' || $role == 'kasir'): ?>
-                        <!-- PENJUALAN -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" onclick="goToPage('penjualan');">
-                                <i class="nav-icon fas fa-shopping-bag"></i>
-                                <p>
-                                    Penjualan
-                                </p>
-                            </a>
-                        </li>
+                        <?php if ($role == 'admin' || $role == 'staff' || $role == 'kasir') : ?>
+                            <!-- PENJUALAN -->
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" onclick="goToPage('penjualan');">
+                                    <i class="nav-icon fas fa-shopping-bag"></i>
+                                    <p>
+                                        Penjualan
+                                    </p>
+                                </a>
+                            </li>
                         <?php endif; ?>
 
 
@@ -226,19 +226,7 @@
     <!-- page script -->
     <script>
         $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "autoWidth": false,
-            });
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+            $("#dataTable").DataTable();
         });
     </script>
 </body>

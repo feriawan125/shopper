@@ -1,5 +1,5 @@
 <?php include '../../config.php' ?>
-<?php 
+<?php
 require '../../auth.php';
 Authentication::isAuth();
 Authentication::isAdmin();
@@ -14,7 +14,7 @@ Authentication::isAdmin();
         <!-- UP THE TABLE -->
         <div class="row">
             <!-- BUTTON TAMBAH DATA -->
-            <div class="col-md-9">
+            <div class="col-md-5">
                 <div class="col-sm-2 col-md-2 row-md4">
                     <div class="dataTables_length" id="example1_length">
                         <br>
@@ -26,7 +26,7 @@ Authentication::isAdmin();
             </div>
 
             <!-- LENGTH DATA -->
-            <div class="col-md-3">
+            <!-- <div class="col-md-7">
                 <div class="dataTables_length" id="example1_length">
                     <br>
                     <div class="input-group input-group-sm" style="float: left;width: 100px;">
@@ -48,7 +48,7 @@ Authentication::isAdmin();
                     </div>
 
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <br>
@@ -56,8 +56,8 @@ Authentication::isAdmin();
         <!-- TABLE -->
         <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
             <div class="row">
-                <div class="col-sm-12">
-                    <table id="example1" class="table table-bordered text-center" role="grid" aria-describedby="example1_info">
+                <div class="table-responsive col-sm-12">
+                    <table id="dataTable" class="table table-bordered text-center" role="grid" aria-describedby="example1_info">
                         <!-- HEADER -->
                         <thead>
                             <tr role="row">
@@ -97,7 +97,7 @@ Authentication::isAdmin();
             </div>
 
             <!-- PAGINATION -->
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-sm-12">
                     <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate" style="float: right;">
                         <ul class="pagination">
@@ -109,7 +109,7 @@ Authentication::isAdmin();
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>
