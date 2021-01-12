@@ -44,21 +44,19 @@ Authentication::isAdmin();
                     </thead>
                     <tbody>
                         <?php $query = "SELECT KodePemasok as 'Kode Pemasok', NamaPemasok as 'Nama Pemasok', AlamatPemasok as 'Alamat Pemasok', TeleponPemasok as 'Telepon Pemasok' FROM pemasok";
-                        $a = select($query);
-                        while ($row = $a->fetch_assoc()) {
-                            echo "<tr>";
-                            echo "<td>" . $row['Kode Pemasok'] . "</td>";
-                            echo "<td class='text-left'>" . $row['Nama Pemasok'] . "</td>";
-                            echo "<td class='text-left  '>" . $row['Alamat Pemasok'] . "</td>";
-                            echo "<td class='text-right'>" . $row['Telepon Pemasok'] . "</td>";
-                            echo "<td>";
-                        ?>
-                            <a href='#' class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="goToPage('master/edit-pemasok');">Edit</a>
-                            <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="goToPage('master/delete-pemasok');">Delete</a>
-                        <?php
-                            echo "</td></tr>";
-                        }
-                        ?>
+                        $data = select($query);
+                        foreach ($data as $row) : ?>
+                            <tr>
+                                <td id='kode' name='kode'><?= $row['Kode Pemasok'] ?></td>
+                                <td class='text-left'> <?= $row['Nama Pemasok'] ?></td>
+                                <td class='text-left'> <?= $row['Alamat Pemasok'] ?></td>
+                                <td class='text-right'> <?= $row['Telepon Pemasok'] ?></td>
+                                <td>
+                                    <button type="submit" class='btn btn-block bg-gradient-warning btn-xs text-white'>Edit</button>
+                                    <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="goToPage('master/delete-barang');">Delete</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

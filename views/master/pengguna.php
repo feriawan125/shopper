@@ -47,23 +47,20 @@ Authentication::isAdmin();
                     <tbody>
                         <!-- PILIH & LOOPING DATA -->
                         <?php $query = "SELECT user_id as 'Kode Pengguna', username as 'Username', email as 'Email', phone as 'Telepon', role as 'Akses' FROM users";
-                        $a = select($query);
-                        while ($row = $a->fetch_assoc()) {
-
-                            echo "<tr role='row'>";
-                            echo "<td>" . $row['Kode Pengguna'] . "</td>";
-                            echo "<td class='text-left'>" . $row['Username'] . "</td>";
-                            echo "<td class='text-left'>" . $row['Email'] . "</td>";
-                            echo "<td class='text-right'>" . $row['Telepon'] . "</td>";
-                            echo "<td>" . $row['Akses'] . "</td>";
-                            echo "<td>";
-                        ?>
-                            <a href='#' class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="goToPage('master/edit-pengguna');">Edit</a>
-                            <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="goToPage('master/delete-pengguna');">Delete</a>
-                        <?php
-                            echo "</td></tr>";
-                        }
-                        ?>
+                        $data = select($query);
+                        foreach ($data as $row) : ?>
+                            <tr>
+                                <td id='kode' name='kode'><?= $row['Kode Pengguna'] ?></td>
+                                <td class='text-left'> <?= $row['Username'] ?></td>
+                                <td class='text-left'> <?= $row['Email'] ?></td>
+                                <td class='text-right'> <?= $row['Telepon'] ?></td>
+                                <td> <?= $row['Akses'] ?></td>
+                                <td>
+                                    <button type="submit" class='btn btn-block bg-gradient-warning btn-xs text-white'>Edit</button>
+                                    <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="goToPage('master/delete-barang');">Delete</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                         </tr>
                 </table>
             </div>

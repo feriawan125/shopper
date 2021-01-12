@@ -48,26 +48,26 @@ Authentication::isAdmin();
                     </thead>
                     <tbody>
                         <?php $query = "SELECT KodeBarang as 'Kode Barang', NamaBarang as 'Nama Barang', FORMAT(StokBarang,'2') as 'Stok Barang', FORMAT(HargaBeli,'2') as 'Harga Beli', FORMAT(HargaJual,'2') as 'Harga Jual' FROM barang";
-                        $a = select($query);
-                        while ($row = $a->fetch_assoc()) {
-                            echo "<tr>";
-                            echo "<td name='kode'>" . $row['Kode Barang'] . "</td>";
-                            echo "<td class='text-left'>" . $row['Nama Barang'] . "</td>";
-                            echo "<td class='text-right'>" . $row['Stok Barang'] . "</td>";
-                            echo "<td class='text-right'>" . $row['Harga Beli'] . "</td>";
-                            echo "<td class='text-right'>" . $row['Harga Jual'] . "</td>";
-                            echo "<td>";
-                        ?>
-                            <a href='#' class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="goToPage('master/edit-barang');">Edit</a>
-                            <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="goToPage('master/delete-barang');">Delete</a>
-                        <?php
-                            echo "</td></tr>";
-                        }
-                        ?>
+                        $data = select($query);
+                        foreach ($data as $row) : ?>
+                            <tr>
+                                <td id='kode' name='kode'><?= $row['Kode Barang'] ?></td>
+                                <td class='text-left'> <?= $row['Nama Barang'] ?></td>
+                                <td class='text-right'> <?= $row['Stok Barang'] ?></td>
+                                <td class='text-right'> <?= $row['Harga Beli'] ?></td>
+                                <td class='text-right'> <?= $row['Harga Jual'] ?></td>
+                                <td>
+                                    <button id="tombolEdit" class='btn btn-block bg-gradient-warning btn-xs text-white'>Edit</button>
+                                    <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="goToPage('master/delete-barang');">Delete</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
         </div>
+
+        <span id="hasil"></span>
     </div>
 </div>
 
@@ -76,3 +76,4 @@ Authentication::isAdmin();
         $('#dataTable').DataTable();
     });
 </script>
+<script src="../../assets/js/editBarang.js"></script>
