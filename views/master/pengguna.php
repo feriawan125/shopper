@@ -1,24 +1,27 @@
+<?php include '../../config.php'; ?>
+
+<!-- CEK AKSES -->
 <?php
-require_once '../../auth.php';
-include '../../config.php';
+require '../../auth.php';
 Authentication::isAuth();
 Authentication::isAdmin();
 ?>
+
 <!-- TEMPLATE MASTER PENGGUNA -->
-<div class="card">
+<div class="card" id="tabelPengguna">
     <div class="card-header">
         <h3 class="card-title">Master Pengguna</h3>
     </div>
 
-    <div id="tabelPengguna" class="card-body">
+    <div class="card-body">
         <!-- UP THE TABLE -->
         <div class="row">
             <!-- BUTTON TAMBAH DATA -->
-            <div class="col-md-9">
+            <div class="col-md-5">
                 <div class="col-sm-2 col-md-2 row-md4">
                     <div class="dataTables_length" id="example1_length">
                         <br>
-                        <a href="#" onclick="goToPage('master/create-pengguna');" class="btn btn-block bg-gradient-primary text-white" style="float: left;width: 135px;" onclick="goToPage('');">
+                        <a href="#" onclick="goToPage('master/create-pengguna');" class="btn btn-block bg-gradient-primary text-white" style="float: left;width: 135px;">
                             Tambah
                         </a>
                     </div>
@@ -57,7 +60,7 @@ Authentication::isAdmin();
                                 <td> <?= $row['Akses'] ?></td>
                                 <td>
                                     <a class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="editPengguna('<?= $row['Kode Pengguna'] ?>')">Edit</a>
-                                    <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="goToPage('master/delete-barang');">Delete</a>
+                                    <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="deletePengguna('<?= $row['Kode Pengguna'] ?>')">Delete</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -66,8 +69,9 @@ Authentication::isAdmin();
             </div>
         </div>
     </div>
-    <div id="divKosong"></div>
 </div>
+<div id="divKosong"></div>
+
 <script>
     $(function() {
         $('#dataTable').DataTable();

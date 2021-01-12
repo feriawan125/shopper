@@ -1,16 +1,19 @@
 <?php include '../../config.php' ?>
+
+<!-- CEK AKSES -->
 <?php
 require '../../auth.php';
 Authentication::isAuth();
 Authentication::isAdmin();
 ?>
+
 <!-- TEMPLATE MASTER BARANG -->
-<div class="card">
+<div class="card" id="tabelPemasok">
     <div class="card-header">
         <h3 class="card-title">Master Pemasok</h3>
     </div>
 
-    <div id="tabelPemasok" class="card-body">
+    <div class="card-body">
         <!-- UP THE TABLE -->
         <div class="row">
             <!-- BUTTON TAMBAH DATA -->
@@ -53,7 +56,7 @@ Authentication::isAdmin();
                                 <td class='text-right'> <?= $row['Telepon Pemasok'] ?></td>
                                 <td>
                                     <a class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="editPemasok('<?= $row['Kode Pemasok'] ?>')">Edit</a>
-                                    <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="goToPage('master/delete-barang');">Delete</a>
+                                    <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="deletePemasok('<?= $row['Kode Pemasok'] ?>')">Delete</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -62,8 +65,8 @@ Authentication::isAdmin();
             </div>
         </div>
     </div>
-    <div id="divKosong"></div>
 </div>
+<div id="divKosong"></div>
 
 <script>
     $(function() {

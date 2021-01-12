@@ -1,4 +1,10 @@
-<?php include '../../config.php' ?>
+<?php include '../../config.php';
+$id = $_GET["kode"];
+$query =  "SELECT * FROM pemasok WHERE KodePemasok = '$id'";
+$res = select($query);
+$pemasok = mysqli_fetch_assoc($res);
+?>
+
 <div class="card card-danger">
     <div class="card-header">
         <h3 class="card-title">Delete</h3>
@@ -15,22 +21,22 @@
                     <div class="form-group row">
                         <p class="col-sm-1 col-form-p">Kode</p>
                         <p class="col-sm-auto col-form-p">:</p>
-                        <p class="col-sm-auto col-form-p"></p>
+                        <p class="col-sm-auto col-form-p"><?= $pemasok['KodePemasok'] ?></p>
                     </div>
                     <div class="form-group row">
                         <p class="col-sm-1 col-form-p">Nama</p>
                         <p class="col-sm-auto col-form-p">:</p>
-                        <p class="col-sm-auto col-form-p"></p>
+                        <p class="col-sm-auto col-form-p"><?= $pemasok['NamaPemasok'] ?></p>
                     </div>
                     <div class="form-group row">
                         <p class="col-sm-1 col-form-p">Alamat</p>
                         <p class="col-sm-auto col-form-p">:</p>
-                        <p class="col-sm-auto col-form-p"></p>
+                        <p class="col-sm-auto col-form-p"><?= $pemasok['AlamatPemasok'] ?></p>
                     </div>
                     <div class="form-group row">
                         <p class="col-sm-1 col-form-p">No. Telp</p>
                         <p class="col-sm-auto col-form-p">:</p>
-                        <p class="col-sm-auto col-form-p"></p>
+                        <p class="col-sm-auto col-form-p"><?= $pemasok['TeleponPemasok'] ?></p>
                     </div>
                 </blockquote>
             </div>
