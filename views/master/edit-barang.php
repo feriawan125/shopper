@@ -3,9 +3,12 @@
 include '../../config.php';
 
 $id = $_GET["kode"];
-$results = getAllById('barang', $id, 'KodeBarang');
-$result = $results[0];
-var_dump($result);
+$query =  "SELECT * FROM barang WHERE KodeBarang = '$id'";
+$res = select($query);
+$barang = mysqli_fetch_assoc($res);
+// $results = getAllById('barang', $id, 'KodeBarang');
+// $result = $results[0];
+// var_dump($result);
 ?>
 
 <div class="card card-warning">
@@ -20,7 +23,7 @@ var_dump($result);
                 <div class="form-group row">
                     <label for="kode" class="col-sm-2 col-form-label">Kode</label>
                     <div class="col-sm-10">
-                        <input type="text" value="" class="form-control" id="kode" name="kode" readonly>
+                        <input type="text" value="<?=$id?>" class="form-control" id="kode" name="kode" readonly>
                         <div class="invalid-feedback">
 
                         </div>
@@ -29,7 +32,7 @@ var_dump($result);
                 <div class="form-group row">
                     <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                        <input type="text" value="" class="form-control" id="nama" name="nama">
+                        <input type="text" value="<?=$barang['NamaBarang']?>" class="form-control" id="nama" name="nama">
                         <div class="invalid-feedback">
 
                         </div>
@@ -38,7 +41,7 @@ var_dump($result);
                 <div class="form-group row">
                     <label for="stok-barang" class="col-sm-2 col-form-label">Stok</label>
                     <div class="col-sm-10">
-                        <input type="number" value="" class="form-control" id="stok-barang" name="stok-barang" readonly>
+                        <input type="number" value="<?=$barang['StokBarang']?>" class="form-control" id="stok-barang" name="stok-barang" readonly>
                         <div class="invalid-feedback">
 
                         </div>
@@ -53,7 +56,7 @@ var_dump($result);
                                     <img alt="Rp.">
                                 </span>
                             </div>
-                            <input type="text" value="" class="form-control" id="harga-beli" name="harga-beli" data-type="currency">
+                            <input type="text" value="<?=$barang['HargaBeli']?>" class="form-control" id="harga-beli" name="harga-beli" data-type="currency">
                             <div class="invalid-feedback">
 
                             </div>
@@ -69,7 +72,7 @@ var_dump($result);
                                     <img alt="Rp.">
                                 </span>
                             </div>
-                            <input type="text" value="" class="form-control" id="harga-jual" name="harga-jual">
+                            <input type="text" value="<?=$barang['HargaJual']?>" class="form-control" id="harga-jual" name="harga-jual">
                             <div class="invalid-feedback">
 
                             </div>
@@ -79,7 +82,7 @@ var_dump($result);
                 <div class="form-group row">
                     <label for="slug" class="col-sm-2 col-form-label">Slug</label> <!-- Slug adalah nama samaran yang berguna untuk url-->
                     <div class="col-sm-10">
-                        <input type="text" value="" class="form-control" id="slug" name="slug">
+                        <input type="text" value="<?=$barang['Slug']?>" class="form-control" id="slug" name="slug">
                         <div class="invalid-feedback">
 
                         </div>
