@@ -53,7 +53,7 @@ $barang = mysqli_fetch_assoc($res);
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
-                                    <img alt="Rp.">
+                                    Rp. 
                                 </span>
                             </div>
                             <input type="text" value="<?=$barang['HargaBeli']?>" class="form-control" id="harga-beli" name="harga-beli" data-type="currency">
@@ -69,7 +69,7 @@ $barang = mysqli_fetch_assoc($res);
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
-                                    <img alt="Rp.">
+                                    Rp. 
                                 </span>
                             </div>
                             <input type="text" value="<?=$barang['HargaJual']?>" class="form-control" id="harga-jual" name="harga-jual">
