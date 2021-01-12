@@ -8,12 +8,12 @@ Authentication::isAdmin();
 ?>
 
 <!-- TEMPLATE MASTER BARANG -->
-<div class="card">
+<div class="card" id="tabelBarang">
     <div class="card-header">
         <h3 class="card-title">Master Barang</h3>
     </div>
 
-    <div id="tabelBarang" class="card-body">
+    <div class="card-body">
         <!-- UP THE TABLE -->
         <div class="row">
             <!-- BUTTON TAMBAH DATA -->
@@ -67,8 +67,8 @@ Authentication::isAdmin();
             </div>
         </div>
     </div>
-    <div id="divKosong"></div>
 </div>
+<div id="divKosong"></div>
 
 <script>
     $(function() {

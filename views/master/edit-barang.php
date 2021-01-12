@@ -9,7 +9,7 @@ $barang = mysqli_fetch_assoc($res);
 
 ?>
 
-<div class="card card-warning">
+<div class="card card-warning pt-1">
     <div class="card-header">
         <h3 class="card-title text-thead-dark">Edit Master Barang</h3>
     </div>
