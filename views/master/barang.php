@@ -1,9 +1,12 @@
 <?php include '../../config.php' ?>
+
+<!-- CEK AKSES -->
 <?php
 require '../../auth.php';
 Authentication::isAuth();
 Authentication::isAdmin();
 ?>
+
 <!-- TEMPLATE MASTER BARANG -->
 <div class="card">
     <div class="card-header">
@@ -48,7 +51,7 @@ Authentication::isAdmin();
                         $a = select($query);
                         while ($row = $a->fetch_assoc()) {
                             echo "<tr>";
-                            echo "<td>" . $row['Kode Barang'] . "</td>";
+                            echo "<td name='kode'>" . $row['Kode Barang'] . "</td>";
                             echo "<td class='text-left'>" . $row['Nama Barang'] . "</td>";
                             echo "<td class='text-right'>" . $row['Stok Barang'] . "</td>";
                             echo "<td class='text-right'>" . $row['Harga Beli'] . "</td>";

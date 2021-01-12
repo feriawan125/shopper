@@ -1,4 +1,12 @@
-<?php include '../../config.php' ?>
+<?php
+
+include '../../config.php';
+
+$id = $_GET["kode"];
+$results = getAllById('barang', $id, 'KodeBarang');
+$result = $results[0];
+var_dump($result);
+?>
 
 <div class="card card-warning">
     <div class="card-header">

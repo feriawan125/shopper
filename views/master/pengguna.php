@@ -53,7 +53,7 @@ Authentication::isAdmin();
                             echo "<tr role='row'>";
                             echo "<td>" . $row['Kode Pengguna'] . "</td>";
                             echo "<td class='text-left'>" . $row['Username'] . "</td>";
-                            echo "<td class='text-left  '>" . $row['Email'] . "</td>";
+                            echo "<td class='text-left'>" . $row['Email'] . "</td>";
                             echo "<td class='text-right'>" . $row['Telepon'] . "</td>";
                             echo "<td>" . $row['Akses'] . "</td>";
                             echo "<td>";

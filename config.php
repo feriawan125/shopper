@@ -13,6 +13,14 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+function getAllById($table, $id, $namaid)
+{
+    $sql = "SELECT * FROM $table WHERE $namaid = $id";
+    $result = getData($sql);
+    $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $rows;
+}
+
 function insert($namatabel, array $namakolom, array $isikolom, $pesanberhasil, $pesangagal)
 {
     global $conn;

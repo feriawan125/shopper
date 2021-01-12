@@ -106,11 +106,3 @@ class Authentication
   }
 
 }
-
-
-// if(getallheaders()['token']==="testing1234"){ 
-// } 
-// else{ 
-//   header('location: ./');
-// } 
-?>
