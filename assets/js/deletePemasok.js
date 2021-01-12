@@ -1,3 +1,4 @@
+// FUNGSI UNTUK MEMBUKA DETAIL DATA
 function deletePemasok(id) {
     var tabelPemasok = document.getElementById('tabelPemasok');
     var divKosong = document.getElementById('divKosong');

@@ -98,7 +98,7 @@ function delete($namatabel, array $namakolom, array $isikolom, $pesanberhasil, $
                 $query = $query . ' and ';
             }
         }
-        // echo $query;
+        echo $query;
 
         if (mysqli_query($conn, $query)) {
             echo $pesanberhasil;

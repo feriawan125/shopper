@@ -1,3 +1,4 @@
+// FUNGSI UNTUK MEMBUKA DETAIL DATA
 function deletePengguna(id) {
     var tabelPengguna = document.getElementById('tabelPengguna');
     var divKosong = document.getElementById('divKosong');
