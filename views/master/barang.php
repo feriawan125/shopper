@@ -24,31 +24,6 @@ Authentication::isAdmin();
                     </div>
                 </div>
             </div>
-
-            <!-- LENGTH DATA -->
-            <!-- <div class="col-md-7">
-                <div class="dataTables_length" id="example1_length">
-                    <br>
-                    <div class="input-group input-group-sm" style="float: left;width: 100px;">
-                        <select name="example1_length" aria-controls="example1" class="custom-select custom-select-sm form-control form-control-sm">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
-                    </div>
-
-                    <div class="input-group input-group-sm" style="float: right;width: 275px;">
-
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                        </div>
-                    </div>
-
-                </div>
-            </div> -->
         </div>
 
         <br>
@@ -90,27 +65,11 @@ Authentication::isAdmin();
                 </table>
             </div>
         </div>
-
-        <!-- PAGINATION -->
-        <!-- <div class="row">
-            <div class="col-sm-12">
-                <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate" style="float: right;">
-                    <ul class="pagination">
-                        <li class="paginate_button page-item previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                        <li class="paginate_button page-item active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                        <li class="paginate_button page-item next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div> -->
-
     </div>
 </div>
 
 <script>
-$(function() {
-    $('#dataTable').DataTable();
-});
+    $(function() {
+        $('#dataTable').DataTable();
+    });
 </script>
