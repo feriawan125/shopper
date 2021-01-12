@@ -54,63 +54,63 @@ Authentication::isAdmin();
         <br>
 
         <!-- TABLE -->
-        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-            <div class="row">
-                <div class="table-responsive col-sm-12">
-                    <table id="dataTable" class="table table-bordered text-center" role="grid" aria-describedby="example1_info">
-                        <!-- HEADER -->
-                        <thead>
-                            <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">Kode Barang</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Nama Barang</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Stok Barang</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Harga Beli</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">Harga Jual</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php ?>
-                            <tr role="row" class="odd">
-                                <?php $query = "SELECT KodeBarang as 'Kode Barang', NamaBarang as 'Nama Barang', FORMAT(StokBarang,'2') as 'Stok Barang', FORMAT(HargaBeli,'2') as 'Harga Beli', FORMAT(HargaJual,'2') as 'Harga Jual' FROM barang";
-                                $a = select($query);
-                                while ($row = $a->fetch_assoc()) {
-                                    echo "<tr role='row' class='odd'>";
-                                    echo "<td>" . $row['Kode Barang'] . "</td>";
-                                    echo "<td class='text-left'>" . $row['Nama Barang'] . "</td>";
-                                    echo "<td class='text-right'>" . $row['Stok Barang'] . "</td>";
-                                    echo "<td class='text-right'>" . $row['Harga Beli'] . "</td>";
-                                    echo "<td class='text-right'>" . $row['Harga Jual'] . "</td>";
-                                    echo "<td>";
-                                ?>
-                                    <a href='#' class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="goToPage('master/edit-barang');">Edit</a>
-                                    <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="goToPage('master/delete-barang');">Delete</a>
-                                <?php
-                                    echo "</td></tr>";
-                                }
-                                ?>
-                            </tr>
-                            <?php ?>
-                        </tbody>
-                    </table>
+        <div class="row">
+            <div class="table-responsive col-sm-12">
+                <table id="dataTable" class="table table-bordered text-center">
+                    <!-- HEADER -->
+                    <thead>
+                        <tr>
+                            <th>Kode Barang</th>
+                            <th>Nama Barang</th>
+                            <th>Stok Barang</th>
+                            <th>Harga Beli</th>
+                            <th>Harga Jual</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $query = "SELECT KodeBarang as 'Kode Barang', NamaBarang as 'Nama Barang', FORMAT(StokBarang,'2') as 'Stok Barang', FORMAT(HargaBeli,'2') as 'Harga Beli', FORMAT(HargaJual,'2') as 'Harga Jual' FROM barang";
+                        $a = select($query);
+                        while ($row = $a->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $row['Kode Barang'] . "</td>";
+                            echo "<td class='text-left'>" . $row['Nama Barang'] . "</td>";
+                            echo "<td class='text-right'>" . $row['Stok Barang'] . "</td>";
+                            echo "<td class='text-right'>" . $row['Harga Beli'] . "</td>";
+                            echo "<td class='text-right'>" . $row['Harga Jual'] . "</td>";
+                            echo "<td>";
+                        ?>
+                            <a href='#' class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="goToPage('master/edit-barang');">Edit</a>
+                            <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="goToPage('master/delete-barang');">Delete</a>
+                        <?php
+                            echo "</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- PAGINATION -->
+        <!-- <div class="row">
+            <div class="col-sm-12">
+                <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate" style="float: right;">
+                    <ul class="pagination">
+                        <li class="paginate_button page-item previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                        <li class="paginate_button page-item active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                        <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                        <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
+                        <li class="paginate_button page-item next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
+                    </ul>
                 </div>
             </div>
+        </div> -->
 
-            <!-- PAGINATION -->
-            <!-- <div class="row">
-                <div class="col-sm-12">
-                    <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate" style="float: right;">
-                        <ul class="pagination">
-                            <li class="paginate_button page-item previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                            <li class="paginate_button page-item active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                            <li class="paginate_button page-item next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div> -->
-
-        </div>
     </div>
 </div>
+
+<script>
+$(function() {
+    $('#dataTable').DataTable();
+});
+</script>
