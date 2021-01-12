@@ -6,9 +6,7 @@ $id = $_GET["kode"];
 $query =  "SELECT * FROM barang WHERE KodeBarang = '$id'";
 $res = select($query);
 $barang = mysqli_fetch_assoc($res);
-// $results = getAllById('barang', $id, 'KodeBarang');
-// $result = $results[0];
-// var_dump($result);
+
 ?>
 
 <div class="card card-warning">
