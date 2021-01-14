@@ -7,16 +7,27 @@ include_once("../../config.php");
 Authentication::isAuth();
 Authentication::isAdmin();
 
-$id = $_POST["kode"];
-$namakolom = array("KodeBarang");
-$isikolom = array(htmlspecialchars($id));
-$pesanberhasil = "Delete Data Berhasil!";
-$pesangagal = "Delete Data Gagal!";
+$data = json_decode(file_get_contents("php://input"));
+if (isset($data->{"action"})) {
+    $id = $data->{"data"};
+    if ($data->{"action"} == "delete") {
+        deleteBarang($id);
+    }elseif ($data->{"action"} == "view") {
+        viewBarang($id);
+    }
+}
 
-// Insert user data into table
-delete("barang", $namakolom, $isikolom, $pesanberhasil, $pesangagal);
-if (isSuccess()) {
-    echo 'Delete Data Berhasil!';
-} else {
-    echo '';
+function deleteBarang($id){
+    $namakolom = "KodeBarang";
+    $isikolom = $id;
+    $pesanberhasil = "Delete Data Berhasil!";
+    $pesangagal = "Delete Data Gagal!";
+    
+    // Insert user data into table
+    delete("barang", $namakolom, $isikolom, $pesanberhasil, $pesangagal);
+}
+
+function viewBarang($id)
+{
+
 }

@@ -1,24 +1,23 @@
 // FUNGSI MENGHAPUS DATA
 function deleteData(id) {
 
-  var formBarang = document.getElementById('formBarang');
-
   var xhr = new XMLHttpRequest();
 
   xhr.onreadystatechange = function (){
     if (xhr.readyState == 4 && xhr.status == 200) {
       if (xhr.responseText == 'Delete Data Berhasil!') {
         swal('Sukses', 'Data barang sukses dihapus', 'success'); 
-        formBarang.reset();
+        goToPage('master/barang');
       }else{
         swal('Gagal', 'Data barang gagal dihapus', 'error'); 
       }
     }
   }
 
-  xhr.open("POST", "../assets/ajax/deleteBarang.php?kode=" + id, true);
+  xhr.open("POST", "../assets/ajax/deleteBarang.php", true);
   xhr.setRequestHeader('token', getCookie('token'));
-  xhr.send(formData);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify({action: "delete", data: id}));
 
 }
 
@@ -38,5 +37,7 @@ function deleteBarang(id) {
   }
   
   xhr.open('GET', '../views/master/delete-barang.php?kode=' + id, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader('token', getCookie('token'));
   xhr.send();
 }

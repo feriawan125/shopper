@@ -61,19 +61,18 @@ function update($namatabel, array $namakolom, array $isikolom, array $wherekolom
         $query = ' update ' . $namatabel . ' set ';
         $temp = '';
         for ($i = 0; $i < count($namakolom); $i++) {
-            $query = $query . $namakolom[$i];
+            $query = $query . $namakolom[$i] . ' = "' . $isikolom[$i] . '"';
             if ($i < count($namakolom) - 1) {
-                $query = $query . ',';
+                $query = $query . ', ';
             }
         }
         $query = $query . ' where ';
         for ($i = 0; $i < count($wherekolom); $i++) {
-            $query = $query . $wherekolom[$i] . '=?';
+            $query = $query . $wherekolom[$i] . '=' . $isiwhere[$i];
             if ($i < count($wherekolom) - 1) {
                 $query = $query . ',';
             }
         }
-        // echo $query;
 
         if (mysqli_query($conn, $query)) {
             echo $pesanberhasil;
@@ -85,20 +84,11 @@ function update($namatabel, array $namakolom, array $isikolom, array $wherekolom
     }
 }
 
-function delete($namatabel, array $namakolom, array $isikolom, $pesanberhasil, $pesangagal)
+function delete($namatabel, $namakolom, $isikolom, $pesanberhasil, $pesangagal)
 {
     global $conn;
     try {
-        $query = ' delete from ' . $namatabel . ' where ';
-
-        for ($i = 0; $i < count($namakolom); $i++) {
-            $query = $query . $namakolom[$i] . ' = ? ';
-
-            if ($i < count($namakolom) - 1) {
-                $query = $query . ' and ';
-            }
-        }
-        echo $query;
+        $query = ' delete from ' . $namatabel . ' where ' . $namakolom . '=' . $isikolom;
 
         if (mysqli_query($conn, $query)) {
             echo $pesanberhasil;

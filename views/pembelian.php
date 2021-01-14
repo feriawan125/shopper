@@ -43,7 +43,7 @@ Authentication::isStaff();
                             <div class="form-group row">
                                 <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
                                 <div class="col-sm-4">
-                                    <input type="date" class="form-control" id="" name="">
+                                    <input type="date" class="form-control" id="datePicker" name="">
                                 </div>
                             </div>
                         </div>
@@ -285,3 +285,12 @@ Authentication::isStaff();
     </div>
 </div>
 <script src="../assets/js/pembelian.js"></script>
+<script>
+    Date.prototype.toDateInputValue = (function() {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0,10);
+    });
+    document.getElementById('datePicker').value = new Date().toDateInputValue();
+
+</script>

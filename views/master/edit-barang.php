@@ -21,7 +21,7 @@ $barang = mysqli_fetch_assoc($res);
                 <div class="form-group row">
                     <label for="kode" class="col-sm-2 col-form-label">Kode</label>
                     <div class="col-sm-10">
-                        <input type="text" value="<?= $id ?>" class="form-control" id="kode" name="kode" readonly>
+                        <input type="text" value="<?= $id ?>" class="form-control" id="kodeBarang" name="kode" readonly>
                         <div class="invalid-feedback">
 
                         </div>
@@ -30,7 +30,7 @@ $barang = mysqli_fetch_assoc($res);
                 <div class="form-group row">
                     <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                        <input type="text" value="<?= $barang['NamaBarang'] ?>" class="form-control" id="nama" name="nama">
+                        <input type="text" value="<?= $barang['NamaBarang'] ?>" class="form-control" id="namaBarang" name="nama">
                         <div class="invalid-feedback">
 
                         </div>
@@ -54,7 +54,7 @@ $barang = mysqli_fetch_assoc($res);
                                     Rp.
                                 </span>
                             </div>
-                            <input type="text" value="<?= $barang['HargaBeli'] ?>" class="form-control" id="harga-beli" name="harga-beli" data-type="currency">
+                            <input type="text" value="<?= $barang['HargaBeli'] ?>" class="form-control" id="hargaBeli" name="harga-beli" data-type="currency">
                             <div class="invalid-feedback">
 
                             </div>
@@ -70,7 +70,7 @@ $barang = mysqli_fetch_assoc($res);
                                     Rp.
                                 </span>
                             </div>
-                            <input type="text" value="<?= $barang['HargaJual'] ?>" class="form-control" id="harga-jual" name="harga-jual">
+                            <input type="text" value="<?= $barang['HargaJual'] ?>" class="form-control" id="hargaJual" name="harga-jual">
                             <div class="invalid-feedback">
 
                             </div>
@@ -90,9 +90,11 @@ $barang = mysqli_fetch_assoc($res);
 
             <!-- FOOTER -->
             <div class="card-footer">
-                <button type="submit" class="btn btn-info">Update</button>
+                <a href="#" class="btn btn-info" onclick="editBarang();">Update</a>
                 <a href="#" onclick="goToPage('master/barang');" class="btn btn-default float-right">Cancel</a>
             </div>
         </form>
     </div>
 </div>
+
+<script src="../assets/js/editBarang.js"></script>
