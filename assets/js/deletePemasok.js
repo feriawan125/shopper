@@ -18,7 +18,6 @@ function deleteData(id) {
   xhr.setRequestHeader('token', getCookie('token'));
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.send(JSON.stringify({action: "delete", data: id}));
-
 }
 
 // FUNGSI UNTUK MEMBUKA DETAIL DATA
