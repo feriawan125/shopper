@@ -59,7 +59,7 @@ Authentication::isAdmin();
                                 <td class='text-right'> <?= $row['Telepon'] ?></td>
                                 <td> <?= $row['Akses'] ?></td>
                                 <td>
-                                    <a class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="editPengguna('<?= $row['Kode Pengguna'] ?>')">Edit</a>
+                                    <a class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="editPenggunaForm('<?= $row['Kode Pengguna'] ?>')">Edit</a>
                                     <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="deletePengguna('<?= $row['Kode Pengguna'] ?>')">Delete</a>
                                 </td>
                             </tr>

@@ -55,7 +55,7 @@ Authentication::isAdmin();
                                 <td class='text-left'> <?= $row['Alamat Pemasok'] ?></td>
                                 <td class='text-right'> <?= $row['Telepon Pemasok'] ?></td>
                                 <td>
-                                    <a class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="editPemasok('<?= $row['Kode Pemasok'] ?>')">Edit</a>
+                                    <a class='btn btn-block bg-gradient-warning btn-xs text-white' onclick="editPemasokForm('<?= $row['Kode Pemasok'] ?>')">Edit</a>
                                     <a href='#' class='btn btn-block bg-gradient-danger btn-xs text-white' onclick="deletePemasok('<?= $row['Kode Pemasok'] ?>')">Delete</a>
                                 </td>
                             </tr>

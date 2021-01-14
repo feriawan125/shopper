@@ -11,23 +11,23 @@ $data = json_decode(file_get_contents("php://input"));
 if (isset($data->{"action"})) {
     $id = $data->{"data"};
     if ($data->{"action"} == "delete") {
-        deleteBarang($id);
+        deletePemasok($id);
     } elseif ($data->{"action"} == "view") {
-        viewBarang($id);
+        viewPemasok($id);
     }
 }
 
-function deleteBarang($id)
+function deletePemasok($id)
 {
-    $namakolom = "KodeBarang";
+    $namakolom = "KodePemasok";
     $isikolom = $id;
     $pesanberhasil = "Delete Data Berhasil!";
     $pesangagal = "Delete Data Gagal!";
 
     // Insert user data into table
-    delete("barang", $namakolom, $isikolom, $pesanberhasil, $pesangagal);
+    delete("pemasok", $namakolom, $isikolom, $pesanberhasil, $pesangagal);
 }
 
-function viewBarang($id)
+function viewPemasok($id)
 {
 }

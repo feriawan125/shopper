@@ -12,7 +12,7 @@ $pengguna = mysqli_fetch_assoc($res);
 
     <!-- BODY -->
     <div class="card-body">
-        <form class="form-horizontal">
+        <form id="formPengguna" action="" class="form-horizontal">
             <div class="card-body">
                 <div class="form-group row">
                     <h4>Anda Yakin ingin menghapus data pengguna ini ? </h4>
@@ -53,10 +53,11 @@ $pengguna = mysqli_fetch_assoc($res);
 
             <!-- card footer -->
             <div class="card-footer">
-                <a href="" class="btn btn-danger">Delete</a>
+                <a href="#" onclick="deleteData('<?= $pengguna['user_id'] ?>')" class="btn btn-danger" name="submit" id="submit">Delete</a>
                 <a href="#" onclick="goToPage('master/pengguna');" class="btn btn-default float-right">Cancel</a>
             </div>
 
         </form>
     </div>
 </div>
+<script src="../assets/js/deletePengguna.js"></script>

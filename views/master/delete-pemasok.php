@@ -12,7 +12,7 @@ $pemasok = mysqli_fetch_assoc($res);
 
     <!-- BODY -->
     <div class="card-body">
-        <form class="form-horizontal">
+        <form id="formPemasok" action="" class="form-horizontal">
             <div class="card-body">
                 <div class="form-group row">
                     <h4>Anda Yakin ingin menghapus data pemasok ini ? </h4>
@@ -43,10 +43,11 @@ $pemasok = mysqli_fetch_assoc($res);
 
             <!-- FOOTER -->
             <div class="card-footer">
-                <a href="" class="btn btn-danger">Delete</a>
+                <a href="#" onclick="deleteData('<?= $pemasok['KodePemasok'] ?>')" class="btn btn-danger" name="submit" id="submit">Delete</a>
                 <a href="#" onclick="goToPage('master/pemasok');" class="btn btn-default float-right">Cancel</a>
             </div>
 
         </form>
     </div>
 </div>
+<script src="../assets/js/deletePemasok.js"></script>
