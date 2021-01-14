@@ -21,8 +21,8 @@ function deletePemasok($id)
 {
     $namakolom = "KodePemasok";
     $isikolom = $id;
-    $pesanberhasil = "Delete Data Berhasil!";
-    $pesangagal = "Delete Data Gagal!";
+    $pesanberhasil = "Delete Data Pemasok Berhasil!";
+    $pesangagal = "Delete Data Pemasok Gagal!";
 
     // Insert user data into table
     delete("pemasok", $namakolom, $isikolom, $pesanberhasil, $pesangagal);
