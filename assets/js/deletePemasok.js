@@ -5,7 +5,7 @@ function deleteData(id) {
 
   xhr.onreadystatechange = function (){
     if (xhr.readyState == 4 && xhr.status == 200) {
-      if (xhr.responseText == 'Delete Data Berhasil!') {
+      if (xhr.responseText == 'Delete Data Pemasok Berhasil!') {
         swal('Sukses', 'Data pemasok sukses dihapus', 'success'); 
         goToPage('master/pemasok');
       }else{

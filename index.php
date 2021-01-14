@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once 'config.php';
 require 'auth.php';
 if (isset($_POST['login'])) {
@@ -8,13 +8,11 @@ if (isset($_POST['login'])) {
     $res = select($query);
     $res = mysqli_fetch_assoc($res);
     $hashed_pass = $res['password_hash'];
-    if(password_verify($password, $hashed_pass)){
+    if (password_verify($password, $hashed_pass)) {
     }
     $token = Authentication::getToken($res['user_id'], $res['role'], $res['full_name']);
     setcookie('token', $token, time() + (86400), "/");
     header("location: views/template.php");
-
-
 }
 ?>
 <!DOCTYPE html>
@@ -101,7 +99,7 @@ if (isset($_POST['login'])) {
                             <a href="views/forgot-password.php">I forgot my password</a>
                         </p>
                         <p class="mb-0">
-                            <a href="views/register.php" class="text-center">Register a new membership</a>
+                            <a href="../shopper/register.php" class="text-center">Register a new membership</a>
                         </p>
                     </div>
                 </div>
@@ -150,9 +148,9 @@ if (isset($_POST['login'])) {
     <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script>
         function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
         }
     </script>
 </body>

@@ -21,8 +21,8 @@ function deletePengguna($id)
 {
     $namakolom = "user_id";
     $isikolom = $id;
-    $pesanberhasil = "Delete Data Berhasil!";
-    $pesangagal = "Delete Data Gagal!";
+    $pesanberhasil = "Delete Data Pengguna Berhasil!";
+    $pesangagal = "Delete Data Pengguna Gagal!";
 
     // Insert user data into table
     delete("users", $namakolom, $isikolom, $pesanberhasil, $pesangagal);
