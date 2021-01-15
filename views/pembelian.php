@@ -1,9 +1,16 @@
 <?php
 
 require_once '../auth.php';
+include_once '../config.php';
 // include database connection file
 Authentication::isAuth();
 Authentication::isStaff();
+$date = date("Ymd");
+$queryNum = "SELECT COUNT(TanggalBeli) AS counter from hbeli WHERE TanggalBeli >= NOW() - INTERVAL 1 DAY";
+$num = select($queryNum);
+$num = mysqli_fetch_assoc($num)['counter'] + 1;
+$txId = $date . $num
+
 ?>
 
 <link rel="stylesheet" href="../assets/css/pembelian.css">
@@ -31,7 +38,7 @@ Authentication::isStaff();
                             <div class="form-group row">
                                 <label for="nogenerate" class="col-lg-2 col-form-label">No Generate</label>
                                 <div class="col-lg-4">
-                                    <input type="text" class="form-control" id="" name="" placeholder="No Generate">
+                                    <input type="text" class="form-control" id="txId" name="" value="<?=$txId ?>" placeholder="No Generate" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">

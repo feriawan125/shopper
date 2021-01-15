@@ -1,4 +1,5 @@
 var cartItems = [];
+var pemasok = 0;
 $(function () {
   buildCartList();
 })
@@ -78,6 +79,7 @@ function fillPemasok(id, nama, alamat) {
   namaPemasok.value = nama;
   idPemasok.value = id;
   alamatPemasok.value = alamat;
+  pemasok = id;
   $('#modal-pemasok').modal('hide')
 
 }
@@ -197,21 +199,38 @@ function addToCart() {
   if (kuantitas > 0) {
     if (kodeBarang != "") {
       updateCartList(kodeBarang, namaBarang, kuantitas, hargaBeli);
+      kodeBarang = "";
+      namaBarang = "";
+      hargaBeli = "";
+      kuantitas = 1;
     }
   }
 }
 
 function save() {
-  var xhr = new XMLHttpRequest();
-
-  xhr.onreadystatechange = function (){
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      console.log(xhr.responseText);
+  let txId = document.getElementById('txId').value;
+  let total = cartItems.sum("Subtotal");
+  if (pemasok !== "" && cartItems.length !== 0) {
+    var xhr = new XMLHttpRequest();
+  
+    xhr.onreadystatechange = function (){
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        console.log(xhr.responseText);
+      }
     }
+  
+    xhr.open("POST", "../assets/ajax/insertPembelian.php", true);
+    xhr.setRequestHeader('token', getCookie('token'));
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify({txId: txId, pemasok: pemasok, total: total, cart:cartItems}));
+    
   }
+}
 
-  xhr.open("POST", "../assets/ajax/insertPembelian.php", true);
-  xhr.setRequestHeader('token', getCookie('token'));
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(JSON.stringify(cartItems));
+Array.prototype.sum = function (prop) {
+  var total = 0
+  for ( var i = 0, _len = this.length; i < _len; i++ ) {
+      total += parseInt(this[i][prop]);
+  }
+  return total
 }
