@@ -32,7 +32,25 @@ function getPemasok() {
 
   xhr.open("POST", "../assets/ajax/selectPemasok.php", true);
   xhr.setRequestHeader('token', getCookie('token'));
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify({action: "getPemasok"}));
   xhr.send();
+}
+
+function getPemasokDetail(idPemasok) {
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function (){
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      let myList =JSON.parse(xhr.responseText);
+      fillPemasok(idPemasok, myList.NamaPemasok, myList.AlamatPemasok);
+    }
+  }
+
+  xhr.open("POST", "../assets/ajax/selectPemasok.php", true);
+  xhr.setRequestHeader('token', getCookie('token'));
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify({action: "getPemasokDetail", idPemasok: idPemasok}));
 }
 
 
@@ -217,7 +235,7 @@ function save() {
       if (xhr.readyState == 4 && xhr.status == 200) {
         if (xhr.responseText == 'Transaksi Berhasil') {
           swal('Sukses', 'Transaksi berhasil', 'success'); 
-          goToPage('pembelian')
+          goToPage('pembelian');
         }else{
           swal('Gagal', 'Transaksi gagal', 'error'); 
         }
@@ -238,4 +256,42 @@ Array.prototype.sum = function (prop) {
       total += parseInt(this[i][prop]);
   }
   return total
+}
+
+function getNota() {
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function (){
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      let myList =JSON.parse(xhr.responseText);
+      let selector = document.getElementById("tabelNota");
+      let cols = Object.keys(myList[0]);
+      let headerRow = cols
+      .map(col => `<th>${col}</th>`)
+      .join("");
+      let rows = myList
+      .map(row => {
+        let tds = cols.map(col => '<td onclick=\"fillNota(' +`${row['KodePemasok']}, '${row['KodeBeli']}'`+`)\">${row[col]}</td>`).join("");
+        return `<tr class="cursor-pointer">${tds}</tr>`;
+      })
+      .join("");
+  
+      selector.innerHTML = json2Table(headerRow, rows, "pemasok");
+      $(function() {
+        $('#pemasok').DataTable();
+      });
+    }
+  }
+
+  xhr.open("POST", "../assets/ajax/selectNota.php", true);
+  xhr.setRequestHeader('token', getCookie('token'));
+  xhr.send();
+}
+function fillNota(kodePemasok, kodeBeli) {
+  document.getElementById('txId').value = kodeBeli;
+  getPemasokDetail(kodePemasok);
+  $('#modal-nota').modal('hide')
+
+
+
 }

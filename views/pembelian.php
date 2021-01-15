@@ -155,8 +155,8 @@ $txId = $date . $num
                 <div class="col-12">
                     <button type="button" class="btn btn-default float-right" style="margin-right: 5px; min-width:150px"><i class="fas fa-print"></i> Print</button>
                     <button type="button" class="btn btn-danger float-right" style="margin-right: 5px; min-width:150px" data-toggle="modal" data-target="#modal-hapus"><i class=" fas fa-search"></i> Hapus</button>
-                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px; min-width:150px" data-toggle="modal" data-target="#modal-simpanberhasil" onclick="save()"><i class=" fas fa-save"></i> Simpan </button>
-                    <button type="button" class="btn btn-warning float-right" style="margin-right: 5px; min-width:150px" data-toggle="modal" data-target="#modal-nota"><i class=" fas fa-search"></i> Cari Nota</button>
+                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px; min-width:150px" onclick="save()"><i class=" fas fa-save"></i> Simpan </button>
+                    <button type="button" class="btn btn-warning float-right" style="margin-right: 5px; min-width:150px" data-toggle="modal" data-target="#modal-nota" onclick="getNota();"><i class=" fas fa-search"></i> Cari Nota</button>
                 </div>
             </div>
             <br>
@@ -218,6 +218,7 @@ $txId = $date . $num
 
             <div class="modal-body">
                 <!-- CONTENT HERE -->
+                <div id="tabelNota"></div>
             </div>
 
             <div class="modal-footer justify-content-between">
@@ -227,48 +228,7 @@ $txId = $date . $num
         </div>
     </div>
 </div>
-<div class="modal fade" id="modal-simpanberhasil">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Success</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
 
-            <div class="modal-body">
-                <!-- CONTENT HERE -->
-                <h6>Penyimpanan Berhasil</h6>
-            </div>
-
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="modal-simpangagal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Failed</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body">
-                <!-- CONTENT HERE -->
-                <h6>Penyimpanan Gagal</h6>
-            </div>
-
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="modal-hapus">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
