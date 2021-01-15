@@ -15,14 +15,11 @@ foreach ($data -> {'cart'} as $cart) {
   insert("dbeli", $namaKolom, $isiKolom, "", "");
 }
 
-
-
-
-// if (isSuccess()) {
-//   echo 'Transaksi Berhasil';
-// }else {
-//   echo 'Transaksi Gagal';
-// }
+if (isSuccess()) {
+  echo 'Transaksi Berhasil';
+}else {
+  echo 'Transaksi Gagal';
+}
 
 // object(stdClass)#2 (4) {
 //   ["txId"]=>

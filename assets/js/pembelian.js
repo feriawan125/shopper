@@ -215,7 +215,12 @@ function save() {
   
     xhr.onreadystatechange = function (){
       if (xhr.readyState == 4 && xhr.status == 200) {
-        console.log(xhr.responseText);
+        if (xhr.responseText == 'Transaksi Berhasil') {
+          swal('Sukses', 'Transaksi berhasil', 'success'); 
+          goToPage('pembelian')
+        }else{
+          swal('Gagal', 'Transaksi gagal', 'error'); 
+        }
       }
     }
   
