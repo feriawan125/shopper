@@ -21,21 +21,26 @@
                     <div class="row invoice-info">
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="nogenerate" class="col-sm-2 col-form-label">Nota Beli</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="" name="" placeholder="No Generate">
+                                    <label for="nogenerate" class="col-lg-2 col-form-label">No Generate</label>
+                                    <div class="col-lg-4">
+                                        <input type="text" class="form-control" id="txId" name="" value="<?=$txId ?>" placeholder="No Generate" disabled>
+                                    </div>
                                 </div>
-                                <div class="col-sm-2">
-                                    <button type="button" class="btn btn-block bg-gradient-secondary" onclick="getNota();" data-toggle="modal" data-target="#modal-notabeli">Cari</button>
+                                <div class="form-group row">
+                                    <label for="refrensi" class="col-sm-2 col-form-label">Refrensi</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="refrensi" name="" placeholder="Refrensi">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control" id="datePicker" name="">
+                                    </div>
+                                </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="tanggal" class="col-sm-2 col-form-label">Tanggal Retur</label>
-                                <div class="col-sm-4">
-                                    <input type="date" class="form-control" id="" name="">
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
