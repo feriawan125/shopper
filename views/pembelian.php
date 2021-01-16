@@ -4,8 +4,6 @@ include_once '../config.php';
 // include database connection file
 Authentication::isAuth();
 Authentication::isStaff();
-date_default_timezone_set('Asia/Jakarta');
-
 $date = date("Ymd");
 $queryNum = "SELECT COUNT(TanggalBeli) AS counter from hbeli WHERE DATE(TanggalBeli) = CURDATE()";
 $num = select($queryNum);
