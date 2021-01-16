@@ -203,7 +203,7 @@ function updateQty(id, qty, hargaBeli) {
        cartItems[i].Subtotal = cartItems[i].Kuantitas * parseInt(hargaBeli);
        updated = true;
        console.log(cartItems);
-       break; //Stop this loop, we found it!
+       break;
     }
   }
   return updated;
@@ -285,11 +285,47 @@ function getNota() {
 
   xhr.open("POST", "../assets/ajax/selectNota.php", true);
   xhr.setRequestHeader('token', getCookie('token'));
-  xhr.send();
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify({action: "getNota"}));
+}
+function getNotaDetail(kodeBeli){
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function (){
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      let myList =JSON.parse(xhr.responseText);
+      cartItems = myList;
+      let selector = document.getElementById("cartList");
+      let cols = ["Kode", "Nama Barang", "Kuantitas", "Harga Beli", "Subtotal"];
+      let headerRow = cols
+      .map(col => `<th>${col}</th>`)
+      .join("");
+      let rows = cartItems
+      .map(row => {
+        let tds = cols.map(col => `<td>${row[col]}</td>`).join("");
+        return `<tr class="cursor-pointer">${tds}</tr>`;
+      })
+      .join("");
+    
+      $(function() {
+        $('#cart').DataTable({
+          "ordering": false,
+        });
+      });
+    
+      selector.innerHTML = json2Table(headerRow, rows, "cart");
+    }
+  }
+
+  xhr.open("POST", "../assets/ajax/selectNota.php", true);
+  xhr.setRequestHeader('token', getCookie('token'));
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify({action: "getNotaDetail",kodeBeli: kodeBeli}));
 }
 function fillNota(kodePemasok, kodeBeli) {
   document.getElementById('txId').value = kodeBeli;
   getPemasokDetail(kodePemasok);
+  getNotaDetail(kodeBeli);
   $('#modal-nota').modal('hide')
 
 
