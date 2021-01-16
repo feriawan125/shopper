@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jan 16, 2021 at 04:03 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.0
+-- Host: 127.0.0.1
+-- Generation Time: Jan 16, 2021 at 04:35 PM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `barang` (
   `KodeBarang` int(11) NOT NULL,
   `NamaBarang` varchar(100) NOT NULL,
-  `StokBarang` int(11) NOT NULL DEFAULT '0',
+  `StokBarang` int(11) NOT NULL DEFAULT 0,
   `HargaBeli` double NOT NULL,
   `HargaJual` double NOT NULL,
   `CreatedAt` datetime DEFAULT NULL,
@@ -44,9 +44,8 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`KodeBarang`, `NamaBarang`, `StokBarang`, `HargaBeli`, `HargaJual`, `CreatedAt`, `UpdatedAt`, `Slug`) VALUES
-(10, 'Le Minerale 600ML ', 0, 2500, 3000, '2020-11-28 02:36:19', '2020-11-28 05:48:44', 'minerale600'),
+(10, 'Le Minerale 600ML ', 1, 2500, 3000, '2020-11-28 02:36:19', '2020-11-28 05:48:44', 'minerale600'),
 (12, 'Aqua 600ML', 0, 2000, 3000, '2020-11-29 06:32:44', '2020-11-29 06:32:44', 'aqua600'),
-(13, '', 0, 0, 0, '2021-01-10 02:52:42', NULL, ''),
 (16, 'abcd', 0, 12, 15, '2021-01-10 03:50:49', NULL, 'ewewq'),
 (18, 'qwewqe', 0, 123232, 21321, '2021-01-10 04:01:41', NULL, 'wqewqewqe');
 
@@ -75,7 +74,33 @@ INSERT INTO `dbeli` (`KodeBeli`, `KodeBarang`, `Kuantitas`, `HargaBeli`, `Subtot
 (202101164, 16, 1, 12, 12),
 (202101165, 16, 1, 12, 12),
 (202101166, 16, 1, 12, 12),
-(202101166, 10, 1, 2500, 2500);
+(202101166, 10, 1, 2500, 2500),
+(202101167, 10, 1, 2500, 2500),
+(202101168, 10, 1, 2500, 2500);
+
+--
+-- Triggers `dbeli`
+--
+DELIMITER $$
+CREATE TRIGGER `AfterDeleteDBeli` AFTER DELETE ON `dbeli` FOR EACH ROW BEGIN 
+	UPDATE barang SET StokBarang = StokBarang - old.Kuantitas where KodeBarang = old.KodeBarang;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `AfterInsertDBeli` AFTER INSERT ON `dbeli` FOR EACH ROW BEGIN 
+	UPDATE barang SET StokBarang = StokBarang + new.Kuantitas WHERE KodeBarang = new.KodeBarang;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `AfterUpdateDBeli` AFTER UPDATE ON `dbeli` FOR EACH ROW BEGIN 
+	UPDATE barang SET StokBarang = StokBarang - old.Kuantitas WHERE KodeBarang = old.KodeBarang;
+    
+    UPDATE barang SET StokBarang = StokBarang + new.Kuantitas WHERE KodeBarang = new.KodeBarang;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -87,8 +112,25 @@ CREATE TABLE `djual` (
   `KodeJual` int(11) NOT NULL,
   `No` int(11) NOT NULL,
   `KodeBarang` int(11) NOT NULL,
+  `Kuantitas` int(11) NOT NULL,
   `Subtotal` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Triggers `djual`
+--
+DELIMITER $$
+CREATE TRIGGER `AfterDeleteDJual` AFTER DELETE ON `djual` FOR EACH ROW BEGIN 
+	UPDATE barang SET StokBarang = StokBarang + old.Kuantitas where KodeBarang = old.KodeBarang;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `AfterInsertDJual` AFTER INSERT ON `djual` FOR EACH ROW BEGIN 
+	UPDATE barang SET StokBarang = StokBarang - new.Kuantitas WHERE KodeBarang = new.KodeBarang;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -101,8 +143,33 @@ CREATE TABLE `dretur` (
   `No` int(11) NOT NULL,
   `KodeBeli` int(11) NOT NULL,
   `KodeBarang` int(11) NOT NULL,
+  `Kuantitas` int(11) NOT NULL,
   `Subtotal` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Triggers `dretur`
+--
+DELIMITER $$
+CREATE TRIGGER `AfterDeleteDRetur` AFTER DELETE ON `dretur` FOR EACH ROW BEGIN 
+	UPDATE barang SET StokBarang = StokBarang + old.Kuantitas where KodeBarang = old.KodeBarang;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `AfterInsertDRetur` AFTER INSERT ON `dretur` FOR EACH ROW BEGIN 
+	UPDATE barang SET StokBarang = StokBarang - new.Kuantitas WHERE KodeBarang = new.KodeBarang;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `AfterUpdateDRetur` AFTER UPDATE ON `dretur` FOR EACH ROW BEGIN 
+	UPDATE barang SET StokBarang = StokBarang + old.Kuantitas WHERE KodeBarang = old.KodeBarang;
+    
+    UPDATE barang SET StokBarang = StokBarang - new.Kuantitas WHERE KodeBarang = new.KodeBarang;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -111,7 +178,7 @@ CREATE TABLE `dretur` (
 --
 
 CREATE TABLE `hbeli` (
-  `TanggalBeli` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `TanggalBeli` timestamp NOT NULL DEFAULT current_timestamp(),
   `KodeBeli` int(11) NOT NULL,
   `TotalBeli` double NOT NULL,
   `KodePengguna` int(11) NOT NULL,
@@ -129,7 +196,19 @@ INSERT INTO `hbeli` (`TanggalBeli`, `KodeBeli`, `TotalBeli`, `KodePengguna`, `Ko
 ('2021-01-16 14:27:48', 202101163, 4000, 18, 1, ''),
 ('2021-01-16 14:37:21', 202101164, 12, 18, 1, ''),
 ('2021-01-16 14:38:35', 202101165, 12, 18, 2, 'ewfwe'),
-('2021-01-16 14:38:53', 202101166, 2512, 18, 4, '');
+('2021-01-16 14:38:53', 202101166, 2512, 18, 4, ''),
+('2021-01-16 15:05:17', 202101167, 2500, 16, 1, ''),
+('2021-01-16 15:19:21', 202101168, 2500, 16, 1, '');
+
+--
+-- Triggers `hbeli`
+--
+DELIMITER $$
+CREATE TRIGGER `BeforeDeleteHBeli` BEFORE DELETE ON `hbeli` FOR EACH ROW BEGIN
+	DELETE FROM dbeli WHERE KodeBeli = old.KodeBeli;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -144,6 +223,16 @@ CREATE TABLE `hjual` (
   `KodePengguna` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Triggers `hjual`
+--
+DELIMITER $$
+CREATE TRIGGER `BeforeDeleteHJual` BEFORE DELETE ON `hjual` FOR EACH ROW BEGIN
+	DELETE FROM djual WHERE KodeJual = old.KodeJual;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -157,6 +246,16 @@ CREATE TABLE `hretur` (
   `TotalRetur` int(11) NOT NULL,
   `KodePengguna` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Triggers `hretur`
+--
+DELIMITER $$
+CREATE TRIGGER `BeforeDeleteHRetur` BEFORE DELETE ON `hretur` FOR EACH ROW BEGIN
+	DELETE FROM dretur WHERE KodeRetur = old.KodeRetur;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -228,7 +327,7 @@ CREATE TABLE `users` (
   `activate_hash` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `status_message` varchar(255) DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `active` tinyint(1) NOT NULL DEFAULT 0,
   `force_pass_reset` tinyint(1) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
@@ -341,7 +440,7 @@ ALTER TABLE `dretur`
 -- AUTO_INCREMENT for table `hbeli`
 --
 ALTER TABLE `hbeli`
-  MODIFY `KodeBeli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202101167;
+  MODIFY `KodeBeli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202101169;
 
 --
 -- AUTO_INCREMENT for table `hjual`
