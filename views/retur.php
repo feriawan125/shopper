@@ -121,7 +121,8 @@ $txId = $date . $num
                     <br>
                     <div class="card">
                         <div class="col-12">
-                            <div id="cartList"></div>
+                            <div id="cartList"></div></div>
+                            <h3>Total: Rp <span id="txtTotal">0</span></h3>
                         </div>
                     </div>
                 </div>
