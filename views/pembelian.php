@@ -35,20 +35,20 @@ $txId = $date . $num
                     <div class="row invoice-info">
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="nogenerate" class="col-lg-2 col-form-label">No Generate</label>
-                                <div class="col-lg-4">
+                                <label for="nogenerate" class="col-md-4 col-form-label">No Generate</label>
+                                <div class="col-lg-8">
                                     <input type="text" class="form-control" id="txId" name="" value="<?=$txId ?>" placeholder="No Generate" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="refrensi" class="col-sm-2 col-form-label">Refrensi</label>
-                                <div class="col-sm-4">
+                                <label for="refrensi" class="col-md-4 col-form-label">Refrensi</label>
+                                <div class="col-lg-8">
                                     <input type="text" class="form-control" id="refrensi" name="" placeholder="Refrensi">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
-                                <div class="col-sm-4">
+                                <label for="tanggal" class="col-md-4 col-form-label">Tanggal</label>
+                                <div class="col-lg-8">
                                     <input type="date" class="form-control" id="datePicker" name="">
                                 </div>
                             </div>
@@ -61,20 +61,20 @@ $txId = $date . $num
                     <div class="row">
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="pemasok" class="col-sm-2 col-form-label">Pemasok</label>
-                                <div class="col-sm-2">
+                                <label for="pemasok" class="col-md-3 col-form-label">Pemasok</label>
+                                <div class="col-md-2">
                                     <input type="text" class="form-control" id="idPemasok" name="" placeholder="Kode" disabled>
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-md-5">
                                     <input type="text" class="form-control" id="namaPemasok" name="" placeholder="Nama" disabled>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-md-2">
                                     <button type="button" class="btn btn-block bg-gradient-secondary" data-toggle="modal" data-target="#modal-pemasok" onclick="getPemasok()">Cari</button>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
-                                <div class="col-sm-6">
+                                <label for="alamat" class="col-md-3 col-form-label">Alamat</label>
+                                <div class="col-md-9">
                                     <textarea class="form-control" id="alamatPemasok" name="" rows="4" cols="50" disabled></textarea>
                                 </div>
                             </div>

@@ -154,7 +154,7 @@ function getNota() {
       .join("");
       let rows = myList
       .map(row => {
-        let tds = cols.map(col => '<td onclick=\"fillNota(' +`${row['KodePemasok']}, '${row['KodeBeli']}'`+`)\">${row[col]}</td>`).join("");
+        let tds = cols.map(col => '<td onclick=\"fillNotaBeli(' +`'${row['KodeBeli']}'`+`)\">${row[col]}</td>`).join("");
         return `<tr class="cursor-pointer">${tds}</tr>`;
       })
       .join("");
@@ -170,4 +170,20 @@ function getNota() {
   xhr.setRequestHeader('token', getCookie('token'));
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.send(JSON.stringify({action: "getNota"}));
+}
+
+function fillNotaBeli(kodeBeli) {
+  document.getElementById('notaBeli').value = kodeBeli;
+  $('#modal-notabeli').modal('hide');
+
+}
+function fillBarang(id, nama, harga) {
+  let idBarang = document.getElementById("kodeBarang");
+  let namaBarang = document.getElementById("namaBarang");
+  let hargaBeli = document.getElementById("hargaBeli");
+  idBarang.value = id;
+  namaBarang.value = nama;
+  hargaBeli.value = harga;
+  $('#modal-barang').modal('hide')
+
 }

@@ -1,3 +1,16 @@
+<?php
+require_once '../auth.php';
+include_once '../config.php';
+// include database connection file
+Authentication::isAuth();
+Authentication::isStaff();
+$date = date("Ymd");
+$queryNum = "SELECT COUNT(TanggalRetur) AS counter from hretur WHERE DATE(TanggalRetur) = CURDATE()";
+$num = select($queryNum);
+$num = mysqli_fetch_assoc($num)['counter'] + 1;
+$txId = $date . $num
+?>
+
 <link rel="stylesheet" href="../assets/css/pembelian.css">
 
 <!-- TEMPLATE MASTER BARANG -->
@@ -17,30 +30,31 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- LEFT SIDE -->
-                <div class="col-6">
+                <div class="col-9">
                     <div class="row invoice-info">
                         <div class="card-body">
                             <div class="form-group row">
-                                    <label for="nogenerate" class="col-lg-2 col-form-label">No Generate</label>
-                                    <div class="col-lg-4">
-                                        <input type="text" class="form-control" id="txId" name="" value="<?=$txId ?>" placeholder="No Generate" disabled>
-                                    </div>
+                                <label for="nogenerate" class="col-sm-2 col-form-label">Nota Beli</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="notaBeli" name="" placeholder="Kode Beli" disabled>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="refrensi" class="col-sm-2 col-form-label">Refrensi</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control" id="refrensi" name="" placeholder="Refrensi">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
-                                    <div class="col-sm-4">
-                                        <input type="date" class="form-control" id="datePicker" name="">
-                                    </div>
-                                </div>
-                                    </div>
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-block bg-gradient-secondary" onclick="getNota();" data-toggle="modal" data-target="#modal-notabeli">Cari</button>
+                                </div>  
+                            </div>
+                            <div class="form-group row">
+                                <label for="tanggal" class="col-sm-2 col-form-label">No Generate</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="txId" name="" value="<?=$txId ?>" placeholder="No Generate" disabled>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="tanggal" class="col-sm-2 col-form-label">Tanggal Retur</label>
+                                <div class="col-sm-4">
+                                    <input type="date" class="form-control" id="datePicker" name="">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -53,29 +67,29 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- LEFT SIDE -->
-                <div class="col-3">
+                <div class="col-4">
                     <div class="row invoice-info">
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="nogenerate" class="col-sm-3 col-form-label">Barang</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="kodeBarang" name="" placeholder="Kode">
+                                <label for="nogenerate" class="col-md-4 col-form-label">Barang</label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="kodeBarang" name="" placeholder="Kode" disabled>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-md-4">
                                     <button type="button" class="btn btn-block bg-gradient-secondary" data-toggle="modal" data-target="#modal-barang" onclick="getBarang();">Cari</button>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label"></label>
+                                <label class="col-md-4 col-form-label"></label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="namaBarang" name="" placeholder="Nama">
+                                    <input type="text" class="form-control" id="namaBarang" name="" placeholder="Nama" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="hargabeli" class="col-sm-3 col-form-label">Harga Beli</label>
-                                <div class="col-sm-8">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" id="hargaBeli" name="" placeholder="0">
+                                <label for="hargabeli" class="col-md-4 col-form-label">Harga Beli</label>
+                                <div class="col-md-8">
+                                    <div class="input-group mb-4">
+                                        <input type="text" class="form-control" id="hargaBeli" name="" placeholder="0" disabled>
                                         <div class="input-group-append">
                                             <span class="input-group-text">.00</span>
                                         </div>
@@ -83,10 +97,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="kuantitas" class="col-sm-3 col-form-label">Kuantitas</label>
-                                <div class="col-sm-8">
+                                <label for="kuantitas" class="col-md-4 col-form-label">Kuantitas</label>
+                                <div class="col-md-8">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" id="" name="" placeholder="0">
+                                        <input type="text" class="form-control" id="kuantitas" name="" placeholder="0" value="1" min="1">
                                         <div class="input-group-append">
                                             <span class="input-group-text">.00</span>
                                         </div>
@@ -94,8 +108,8 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-4">
-                                    <button type="button" class="btn btn-block bg-gradient-blue">Tambah</button>
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-block bg-gradient-blue" onclick="addToCart()">Tambah</button>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +117,7 @@
                 </div><!-- /.container-fluid -->
 
                 <!-- RIGHT SIDE -->
-                <div class="col-9">
+                <div class="col-8">
                     <br>
                     <div class="card">
                         <div class="col-12">
@@ -256,3 +270,12 @@
 </div>
 
 <script src="../assets/js/retur.js"></script>
+<script>
+    Date.prototype.toDateInputValue = (function() {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0,10);
+    });
+    document.getElementById('datePicker').value = new Date().toDateInputValue();
+
+</script>
