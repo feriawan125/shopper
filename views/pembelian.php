@@ -1,12 +1,13 @@
 <?php
-
 require_once '../auth.php';
 include_once '../config.php';
 // include database connection file
 Authentication::isAuth();
 Authentication::isStaff();
+date_default_timezone_set('Asia/Jakarta');
+
 $date = date("Ymd");
-$queryNum = "SELECT COUNT(TanggalBeli) AS counter from hbeli WHERE TanggalBeli >= NOW() - INTERVAL 1 DAY";
+$queryNum = "SELECT COUNT(TanggalBeli) AS counter from hbeli WHERE DATE(TanggalBeli) = CURDATE()";
 $num = select($queryNum);
 $num = mysqli_fetch_assoc($num)['counter'] + 1;
 $txId = $date . $num
@@ -147,16 +148,18 @@ $txId = $date . $num
                     <div class="card">
                         <div class="col-12">
                             <div class="table-responsive" id="cartList" onload="buildCartList()"></div>
+                            <h3>Total: Rp <span id="txtTotal">0</span></h3>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row no-print">
                 <div class="col-12">
-                    <button type="button" class="btn btn-default float-right" style="margin-right: 5px; min-width:150px"><i class="fas fa-print"></i> Print</button>
-                    <button type="button" class="btn btn-danger float-right" style="margin-right: 5px; min-width:150px" data-toggle="modal" data-target="#modal-hapus"><i class=" fas fa-search"></i> Hapus</button>
-                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px; min-width:150px" onclick="save()"><i class=" fas fa-save"></i> Simpan </button>
-                    <button type="button" class="btn btn-warning float-right" style="margin-right: 5px; min-width:150px" data-toggle="modal" data-target="#modal-nota" onclick="getNota();"><i class=" fas fa-search"></i> Cari Nota</button>
+                    <button type="button" class="btn btn-default float-right" style="margin-right: 5px; min-width:150px;"><i class="fas fa-print"></i> Print</button>
+                    <button type="button" class="btn btn-danger float-right d-none" style="margin-right: 5px; min-width:150px;"id="btnDelete" onclick="delNota();"><i class=" fas fa-search"></i> Hapus</button>
+                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px; min-width:150px;" onclick="save()"><i class=" fas fa-save"></i> Simpan </button>
+                    <button type="button" class="btn btn-warning float-right" style="margin-right: 5px; min-width:150px;" data-toggle="modal" data-target="#modal-nota" onclick="getNota();"><i class=" fas fa-search"></i> Cari Nota</button>
+                    <button type="button" class="btn btn-info float-right" style="margin-right: 5px; min-width:150px;" onclick="resetPembelian();"><i class=" fas fa-redo"></i> Reset Form</button>
                 </div>
             </div>
             <br>
@@ -229,28 +232,7 @@ $txId = $date . $num
     </div>
 </div>
 
-<div class="modal fade" id="modal-hapus">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Anda Yakin Mau Menghapus data ini ?</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
 
-            <div class="modal-body">
-                <!-- CONTENT HERE -->
-                <!-- SHOW DATA -->
-            </div>
-
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Yes</button>
-            </div>
-        </div>
-    </div>
-</div>
 <script src="../assets/js/pembelian.js"></script>
 <script>
     Date.prototype.toDateInputValue = (function() {

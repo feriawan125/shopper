@@ -17,7 +17,7 @@ if (isset($data->{"action"})) {
     $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
     echo json_encode($data); 
   }else if ($data->{"action"} == "getNota"){
-    $query = "SELECT TanggalBeli, KodeBeli, KodePemasok, TotalBeli FROM hbeli";
+    $query = "SELECT TanggalBeli, KodeBeli, KodePemasok, TotalBeli FROM hbeli WHERE void = false";
     $res = select($query);
     $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
     echo json_encode($data); 

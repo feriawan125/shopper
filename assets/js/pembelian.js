@@ -126,7 +126,7 @@ function getBarang() {
 function buildCartList() {
   let cartItems = [];
   let selector = document.getElementById("cartList");
-  let cols = ["Kode", "Nama Barang", "Kuantitas", "Harga Beli", "Subtotal"];
+  let cols = ["Kode", "Nama Barang", "Kuantitas", "Harga Beli", "Subtotal", "Aksi"];
   let headerRow = cols
   .map(col => `<th>${col}</th>`)
   .join("");
@@ -147,32 +147,16 @@ function buildCartList() {
 }
 function updateCartList(kode, namaBarang, kuantitas, hargaBeli) {
   kuantitas = parseInt(kuantitas);
-  hargaBeli = parseInt(hargaBeli)
+  hargaBeli = parseInt(hargaBeli);
+  txtTotal = document.getElementById('txtTotal');
   if(updateQty(kode, kuantitas, hargaBeli)){
     
   }else{
     let subtotal = hargaBeli * kuantitas;
-    cartItems.push({"Kode": `${kode}`, "Nama Barang": `${namaBarang}`, "Kuantitas": `${kuantitas}`, "Harga Beli": `${hargaBeli}`, "Subtotal": `${subtotal}`});
+    cartItems.push({"Kode": `${kode}`, "Nama Barang": `${namaBarang}`, "Kuantitas": `${kuantitas}`, "Harga Beli": `${hargaBeli}`, "Subtotal": `${subtotal}`, "Aksi": `<a href=\"#\" onclick=\"removeFromCart(${kode}); \" class=\"btn btn-block bg-gradient-danger btn-xs text-white\">Delete</a>`});
   }
-  let selector = document.getElementById("cartList");
-  let cols = ["Kode", "Nama Barang", "Kuantitas", "Harga Beli", "Subtotal"];
-  let headerRow = cols
-  .map(col => `<th>${col}</th>`)
-  .join("");
-  let rows = cartItems
-  .map(row => {
-    let tds = cols.map(col => `<td>${row[col]}</td>`).join("");
-    return `<tr class="cursor-pointer">${tds}</tr>`;
-  })
-  .join("");
 
-  $(function() {
-    $('#cart').DataTable({
-      "ordering": false,
-    });
-  });
-
-  selector.innerHTML = json2Table(headerRow, rows, "cart");
+  updateCart();
 }
 
 function updateQty(id, qty, hargaBeli) {
@@ -182,7 +166,6 @@ function updateQty(id, qty, hargaBeli) {
        cartItems[i].Kuantitas = parseInt(cartItems[i].Kuantitas) + parseInt(qty);
        cartItems[i].Subtotal = cartItems[i].Kuantitas * parseInt(hargaBeli);
        updated = true;
-       console.log(cartItems);
        break;
     }
   }
@@ -190,17 +173,17 @@ function updateQty(id, qty, hargaBeli) {
 }
 
 function addToCart() {
-  let kodeBarang = document.getElementById("kodeBarang").value;
-  let namaBarang = document.getElementById("namaBarang").value;
-  let hargaBeli = document.getElementById("hargaBeli").value;
-  let kuantitas = document.getElementById("kuantitas").value;
-  if (kuantitas > 0) {
-    if (kodeBarang != "") {
-      updateCartList(kodeBarang, namaBarang, kuantitas, hargaBeli);
-      kodeBarang = "";
-      namaBarang = "";
-      hargaBeli = "";
-      kuantitas = 1;
+  let kodeBarang = document.getElementById("kodeBarang");
+  let namaBarang = document.getElementById("namaBarang");
+  let hargaBeli = document.getElementById("hargaBeli");
+  let kuantitas = document.getElementById("kuantitas");
+  if (kuantitas.value > 0) {
+    if (kodeBarang.value != "") {
+      updateCartList(kodeBarang.value, namaBarang.value, kuantitas.value, hargaBeli.value);
+      kodeBarang.value = "";
+      namaBarang.value = "";
+      hargaBeli.value = "";
+      kuantitas.value = 1;
     }
   }
 }
@@ -257,9 +240,9 @@ function getNota() {
       })
       .join("");
   
-      selector.innerHTML = json2Table(headerRow, rows, "pemasok");
+      selector.innerHTML = json2Table(headerRow, rows, "cart");
       $(function() {
-        $('#pemasok').DataTable();
+        $('#cart').DataTable();
       });
     }
   }
@@ -276,25 +259,7 @@ function getNotaDetail(kodeBeli){
     if (xhr.readyState == 4 && xhr.status == 200) {
       let myList =JSON.parse(xhr.responseText);
       cartItems = myList;
-      let selector = document.getElementById("cartList");
-      let cols = ["Kode", "Nama Barang", "Kuantitas", "Harga Beli", "Subtotal"];
-      let headerRow = cols
-      .map(col => `<th>${col}</th>`)
-      .join("");
-      let rows = cartItems
-      .map(row => {
-        let tds = cols.map(col => `<td>${row[col]}</td>`).join("");
-        return `<tr class="cursor-pointer">${tds}</tr>`;
-      })
-      .join("");
-    
-      $(function() {
-        $('#cart').DataTable({
-          "ordering": false,
-        });
-      });
-    
-      selector.innerHTML = json2Table(headerRow, rows, "cart");
+      updateCart(false);
     }
   }
 
@@ -307,8 +272,88 @@ function fillNota(kodePemasok, kodeBeli) {
   document.getElementById('txId').value = kodeBeli;
   getPemasokDetail(kodePemasok);
   getNotaDetail(kodeBeli);
-  $('#modal-nota').modal('hide')
+  $('#btnDelete').toggleClass("d-none");
+  $('#modal-nota').modal('hide');
+}
 
+function removeFromCart(KodeBarang) {
+  let index = cartItems.findIndex(obj => obj.Kode==KodeBarang);
+  cartItems.splice(index, 1);
+  updateCart();
+}
 
+function updateCart(aksi = true) {
+  let selector = document.getElementById("cartList");
+  let cols = [];
+  if (aksi) {
+    cols = ["Kode", "Nama Barang", "Kuantitas", "Harga Beli", "Subtotal", "Aksi"];
+  } else{
+    cols = ["Kode", "Nama Barang", "Kuantitas", "Harga Beli", "Subtotal"];
+  }
+  let headerRow = cols
+  .map(col => `<th>${col}</th>`)
+  .join("");
+  let rows = cartItems
+  .map(row => {
+    let tds = cols.map(col => `<td>${row[col]}</td>`).join("");
+    return `<tr class="cursor-pointer">${tds}</tr>`;
+  })
+  .join("");
 
+  $(function() {
+    $('#cart').DataTable({
+      "ordering": false,
+    });
+  });
+
+  txtTotal.innerHTML = new Intl.NumberFormat('id-ID', { maximumSignificantDigits: 3 }).format(cartItems.sum("Subtotal"));
+
+  selector.innerHTML = json2Table(headerRow, rows, "cart");
+}
+
+function delNota() {
+  swal({
+    title: "Ada Yakin?",
+    text: "Data akan dihapus dan tidak dapat dikembalikan lagi!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      let kodeBeli = document.getElementById('txId');
+      var xhr = new XMLHttpRequest();
+
+      xhr.onreadystatechange = function (){
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          if (xhr.responseText == 'Delete Berhasil') {
+            swal('Sukses', 'Pembelian berhasil dihapus', 'success');
+            goToPage('pembelian');
+          }else{
+            swal('Gagal', 'Pembelian gagal dihapus', 'error');
+          }
+        }
+      }
+    
+      xhr.open("POST", "../assets/ajax/deletePembelian.php", true);
+      xhr.setRequestHeader('token', getCookie('token'));
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(JSON.stringify({kodeBeli: kodeBeli.value}));
+    }
+  });
+}
+
+function resetPembelian() {
+  swal({
+    title: "Ada Yakin?",
+    text: "Form akan direset dan tidak dapat dikembalikan lagi!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      goToPage('pembelian');
+    }
+  });
 }
