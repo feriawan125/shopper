@@ -5,8 +5,8 @@ Authentication::isAuth();
 Authentication::isStaff();
 $data = json_decode(file_get_contents("php://input"));
 
-$namaKolom = array("KodeBeli", "TotalBeli", "KodePengguna", "KodePemasok", "Refrensi");
-$isiKolom = array($data -> {'txId'}, $data -> {'total'}, Authentication::getUid(), $data -> {'pemasok'}, $data -> {'refrensi'});
+$namaKolom = array("KodeRetur", "KodeBeli", "TotalRetur","KodePengguna");
+$isiKolom = array($data -> {'txId'}, $data -> {'total'}, Authentication::getUid());
 insert("hbeli", $namaKolom, $isiKolom, "", "");
 
 foreach ($data -> {'cart'} as $cart) {

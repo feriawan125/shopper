@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 16, 2021 at 02:15 PM
+-- Generation Time: Jan 16, 2021 at 04:03 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -60,6 +60,7 @@ CREATE TABLE `dbeli` (
   `KodeBeli` int(11) NOT NULL,
   `KodeBarang` int(11) NOT NULL,
   `Kuantitas` int(11) NOT NULL,
+  `HargaBeli` int(11) NOT NULL,
   `Subtotal` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -67,9 +68,14 @@ CREATE TABLE `dbeli` (
 -- Dumping data for table `dbeli`
 --
 
-INSERT INTO `dbeli` (`KodeBeli`, `KodeBarang`, `Kuantitas`, `Subtotal`) VALUES
-(202101151, 10, 1, 2500),
-(202101151, 12, 1, 2000);
+INSERT INTO `dbeli` (`KodeBeli`, `KodeBarang`, `Kuantitas`, `HargaBeli`, `Subtotal`) VALUES
+(202101151, 10, 1, 0, 2500),
+(202101151, 12, 1, 0, 2000),
+(202101163, 12, 2, 2000, 4000),
+(202101164, 16, 1, 12, 12),
+(202101165, 16, 1, 12, 12),
+(202101166, 16, 1, 12, 12),
+(202101166, 10, 1, 2500, 2500);
 
 -- --------------------------------------------------------
 
@@ -109,15 +115,21 @@ CREATE TABLE `hbeli` (
   `KodeBeli` int(11) NOT NULL,
   `TotalBeli` double NOT NULL,
   `KodePengguna` int(11) NOT NULL,
-  `KodePemasok` int(11) NOT NULL
+  `KodePemasok` int(11) NOT NULL,
+  `Refrensi` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `hbeli`
 --
 
-INSERT INTO `hbeli` (`TanggalBeli`, `KodeBeli`, `TotalBeli`, `KodePengguna`, `KodePemasok`) VALUES
-('2021-01-15 18:18:20', 202101151, 4500, 18, 1);
+INSERT INTO `hbeli` (`TanggalBeli`, `KodeBeli`, `TotalBeli`, `KodePengguna`, `KodePemasok`, `Refrensi`) VALUES
+('2021-01-15 18:18:20', 202101151, 4500, 18, 1, ''),
+('2021-01-16 14:26:11', 202101162, 2000, 18, 1, ''),
+('2021-01-16 14:27:48', 202101163, 4000, 18, 1, ''),
+('2021-01-16 14:37:21', 202101164, 12, 18, 1, ''),
+('2021-01-16 14:38:35', 202101165, 12, 18, 2, 'ewfwe'),
+('2021-01-16 14:38:53', 202101166, 2512, 18, 4, '');
 
 -- --------------------------------------------------------
 
@@ -141,6 +153,7 @@ CREATE TABLE `hjual` (
 CREATE TABLE `hretur` (
   `TanggalRetur` date NOT NULL,
   `KodeRetur` int(11) NOT NULL,
+  `KodeBeli` int(11) NOT NULL,
   `TotalRetur` int(11) NOT NULL,
   `KodePengguna` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -286,7 +299,8 @@ ALTER TABLE `hjual`
 --
 ALTER TABLE `hretur`
   ADD PRIMARY KEY (`KodeRetur`),
-  ADD KEY `KodePengguna` (`KodePengguna`);
+  ADD KEY `KodePengguna` (`KodePengguna`),
+  ADD KEY `KodeBeli` (`KodeBeli`);
 
 --
 -- Indexes for table `migrations`
@@ -327,7 +341,7 @@ ALTER TABLE `dretur`
 -- AUTO_INCREMENT for table `hbeli`
 --
 ALTER TABLE `hbeli`
-  MODIFY `KodeBeli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202101152;
+  MODIFY `KodeBeli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202101167;
 
 --
 -- AUTO_INCREMENT for table `hjual`
@@ -396,7 +410,8 @@ ALTER TABLE `hjual`
 -- Constraints for table `hretur`
 --
 ALTER TABLE `hretur`
-  ADD CONSTRAINT `hretur_ibfk_1` FOREIGN KEY (`KodePengguna`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `hretur_ibfk_1` FOREIGN KEY (`KodePengguna`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `hretur_ibfk_2` FOREIGN KEY (`KodeBeli`) REFERENCES `hbeli` (`KodeBeli`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
