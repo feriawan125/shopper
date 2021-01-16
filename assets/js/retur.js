@@ -3,56 +3,6 @@ var pemasok = 0;
 $(function () {
   buildCartList();
 })
-
-function getPemasok() {
-  
-  var xhr = new XMLHttpRequest();
-
-  xhr.onreadystatechange = function (){
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      let myList =JSON.parse(xhr.responseText);
-      let selector = document.getElementById("tabelPemasok");
-      let cols = Object.keys(myList[0]);
-      let headerRow = cols
-      .map(col => `<th>${col}</th>`)
-      .join("");
-      let rows = myList
-      .map(row => {
-        let tds = cols.map(col => '<td onclick=\"fillPemasok(' +`${row['KodePemasok']}, '${row['NamaPemasok']}', '${row['AlamatPemasok']}'`+`)\">${row[col]}</td>`).join("");
-        return `<tr class="cursor-pointer">${tds}</tr>`;
-      })
-      .join("");
-  
-      selector.innerHTML = json2Table(headerRow, rows, "pemasok");
-      $(function() {
-        $('#pemasok').DataTable();
-      });
-    }
-  }
-
-  xhr.open("POST", "../assets/ajax/selectPemasok.php", true);
-  xhr.setRequestHeader('token', getCookie('token'));
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(JSON.stringify({action: "getPemasok"}));
-}
-
-function getPemasokDetail(idPemasok) {
-  var xhr = new XMLHttpRequest();
-
-  xhr.onreadystatechange = function (){
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      let myList =JSON.parse(xhr.responseText);
-      fillPemasok(idPemasok, myList.NamaPemasok, myList.AlamatPemasok);
-    }
-  }
-
-  xhr.open("POST", "../assets/ajax/selectPemasok.php", true);
-  xhr.setRequestHeader('token', getCookie('token'));
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(JSON.stringify({action: "getPemasokDetail", idPemasok: idPemasok}));
-}
-
-
 function json2Table(headerRow, rows, tableId) {
 
   //build the table
@@ -70,27 +20,6 @@ function json2Table(headerRow, rows, tableId) {
   return table;
 }
 
-function fillPemasok(id, nama, alamat) {
-  let namaPemasok = document.getElementById("namaPemasok");
-  let idPemasok = document.getElementById("idPemasok");
-  let alamatPemasok = document.getElementById("alamatPemasok");
-  namaPemasok.value = nama;
-  idPemasok.value = id;
-  alamatPemasok.value = alamat;
-  pemasok = id;
-  $('#modal-pemasok').modal('hide')
-
-}
-function fillBarang(id, nama, harga) {
-  let idBarang = document.getElementById("kodeBarang");
-  let namaBarang = document.getElementById("namaBarang");
-  let hargaBeli = document.getElementById("hargaBeli");
-  idBarang.value = id;
-  namaBarang.value = nama;
-  hargaBeli.value = harga;
-  $('#modal-barang').modal('hide')
-
-}
 
 function getBarang() {
   
@@ -205,32 +134,6 @@ function addToCart() {
   }
 }
 
-function save() {
-  let txId = document.getElementById('txId').value;
-  let refrensi = document.getElementById('refrensi').value;
-  let total = cartItems.sum("Subtotal");
-  if (pemasok !== "" && cartItems.length !== 0) {
-    var xhr = new XMLHttpRequest();
-  
-    xhr.onreadystatechange = function (){
-      if (xhr.readyState == 4 && xhr.status == 200) {
-        if (xhr.responseText == 'Transaksi Berhasil') {
-          swal('Sukses', 'Transaksi berhasil', 'success'); 
-          goToPage('pembelian');
-        }else{
-          swal('Gagal', 'Transaksi gagal', 'error'); 
-        }
-      }
-    }
-  
-    xhr.open("POST", "../assets/ajax/insertPembelian.php", true);
-    xhr.setRequestHeader('token', getCookie('token'));
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify({txId: txId, pemasok: pemasok, total: total, refrensi: refrensi, cart:cartItems}));
-    
-  }
-}
-
 Array.prototype.sum = function (prop) {
   var total = 0
   for ( var i = 0, _len = this.length; i < _len; i++ ) {
@@ -238,7 +141,6 @@ Array.prototype.sum = function (prop) {
   }
   return total
 }
-
 function getNota() {
   var xhr = new XMLHttpRequest();
 
@@ -268,47 +170,4 @@ function getNota() {
   xhr.setRequestHeader('token', getCookie('token'));
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.send(JSON.stringify({action: "getNota"}));
-}
-function getNotaDetail(kodeBeli){
-  var xhr = new XMLHttpRequest();
-
-  xhr.onreadystatechange = function (){
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      let myList =JSON.parse(xhr.responseText);
-      cartItems = myList;
-      let selector = document.getElementById("cartList");
-      let cols = ["Kode", "Nama Barang", "Kuantitas", "Harga Beli", "Subtotal"];
-      let headerRow = cols
-      .map(col => `<th>${col}</th>`)
-      .join("");
-      let rows = cartItems
-      .map(row => {
-        let tds = cols.map(col => `<td>${row[col]}</td>`).join("");
-        return `<tr class="cursor-pointer">${tds}</tr>`;
-      })
-      .join("");
-    
-      $(function() {
-        $('#cart').DataTable({
-          "ordering": false,
-        });
-      });
-    
-      selector.innerHTML = json2Table(headerRow, rows, "cart");
-    }
-  }
-
-  xhr.open("POST", "../assets/ajax/selectNota.php", true);
-  xhr.setRequestHeader('token', getCookie('token'));
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(JSON.stringify({action: "getNotaDetail",kodeBeli: kodeBeli}));
-}
-function fillNota(kodePemasok, kodeBeli) {
-  document.getElementById('txId').value = kodeBeli;
-  getPemasokDetail(kodePemasok);
-  getNotaDetail(kodeBeli);
-  $('#modal-nota').modal('hide')
-
-
-
 }

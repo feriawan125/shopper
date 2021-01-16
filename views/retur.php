@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../assets/css/pembelian.css">
+
 <!-- TEMPLATE MASTER BARANG -->
 <section class="content-header">
     <div class="container-fluid">
@@ -24,7 +26,7 @@
                                     <input type="text" class="form-control" id="" name="" placeholder="No Generate">
                                 </div>
                                 <div class="col-sm-2">
-                                    <button type="button" class="btn btn-block bg-gradient-secondary" data-toggle="modal" data-target="#modal-notabeli">Cari</button>
+                                    <button type="button" class="btn btn-block bg-gradient-secondary" onclick="getNota();" data-toggle="modal" data-target="#modal-notabeli">Cari</button>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -52,23 +54,23 @@
                             <div class="form-group row">
                                 <label for="nogenerate" class="col-sm-3 col-form-label">Barang</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="" name="" placeholder="Kode">
+                                    <input type="text" class="form-control" id="kodeBarang" name="" placeholder="Kode">
                                 </div>
                                 <div class="col-sm-4">
-                                    <button type="button" class="btn btn-block bg-gradient-secondary" data-toggle="modal" data-target="#modal-barang">Cari</button>
+                                    <button type="button" class="btn btn-block bg-gradient-secondary" data-toggle="modal" data-target="#modal-barang" onclick="getBarang();">Cari</button>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label"></label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="" name="" placeholder="Nama">
+                                    <input type="text" class="form-control" id="namaBarang" name="" placeholder="Nama">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="hargabeli" class="col-sm-3 col-form-label">Harga Beli</label>
                                 <div class="col-sm-8">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" id="" name="" placeholder="0">
+                                        <input type="text" class="form-control" id="hargaBeli" name="" placeholder="0">
                                         <div class="input-group-append">
                                             <span class="input-group-text">.00</span>
                                         </div>
@@ -100,141 +102,7 @@
                     <br>
                     <div class="card">
                         <div class="col-12">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th style="min-width:50px">Kode</th>
-                                        <th style="min-width:150px">Nama Barang</th>
-                                        <th style="min-width:50px">Kuantitas</th>
-                                        <th style="min-width:100px">Harga Beli</th>
-                                        <th style="min-width:100px">Subtotal</th>
-                                        <th style="min-width:25px"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th style="min-width:50px">1</th>
-                                        <th style="min-width:150px">Call of Duty</th>
-                                        <th style="min-width:50px">100</th>
-                                        <th style="min-width:100px">10000</th>
-                                        <th style="min-width:100px">Rp. 1000000</th>
-                                        <th style="min-width:25px">
-                                            <a href="" class="btn btn-block bg-gradient-danger btn-xs text-white">
-                                                Delete
-                                            </a>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th style="min-width:50px">1</th>
-                                        <th style="min-width:150px">Call of Duty</th>
-                                        <th style="min-width:50px">100</th>
-                                        <th style="min-width:100px">10000</th>
-                                        <th style="min-width:100px">Rp. 1000000</th>
-                                        <th style="min-width:25px">
-                                            <a href="" class="btn btn-block bg-gradient-danger btn-xs text-white">
-                                                Delete
-                                            </a>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th style="min-width:50px">1</th>
-                                        <th style="min-width:150px">Call of Duty</th>
-                                        <th style="min-width:50px">100</th>
-                                        <th style="min-width:100px">10000</th>
-                                        <th style="min-width:100px">Rp. 1000000</th>
-                                        <th style="min-width:25px">
-                                            <a href="" class="btn btn-block bg-gradient-danger btn-xs text-white">
-                                                Delete
-                                            </a>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th style="min-width:50px">1</th>
-                                        <th style="min-width:150px">Call of Duty</th>
-                                        <th style="min-width:50px">100</th>
-                                        <th style="min-width:100px">10000</th>
-                                        <th style="min-width:100px">Rp. 1000000</th>
-                                        <th style="min-width:25px">
-                                            <a href="" class="btn btn-block bg-gradient-danger btn-xs text-white">
-                                                Delete
-                                            </a>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th style="min-width:50px">1</th>
-                                        <th style="min-width:150px">Call of Duty</th>
-                                        <th style="min-width:50px">100</th>
-                                        <th style="min-width:100px">10000</th>
-                                        <th style="min-width:100px">Rp. 1000000</th>
-                                        <th style="min-width:25px">
-                                            <a href="" class="btn btn-block bg-gradient-danger btn-xs text-white">
-                                                Delete
-                                            </a>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th style="min-width:50px">1</th>
-                                        <th style="min-width:150px">Call of Duty</th>
-                                        <th style="min-width:50px">100</th>
-                                        <th style="min-width:100px">10000</th>
-                                        <th style="min-width:100px">Rp. 1000000</th>
-                                        <th style="min-width:25px">
-                                            <a href="" class="btn btn-block bg-gradient-danger btn-xs text-white">
-                                                Delete
-                                            </a>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th style="min-width:50px">1</th>
-                                        <th style="min-width:150px">Call of Duty</th>
-                                        <th style="min-width:50px">100</th>
-                                        <th style="min-width:100px">10000</th>
-                                        <th style="min-width:100px">Rp. 1000000</th>
-                                        <th style="min-width:25px">
-                                            <a href="" class="btn btn-block bg-gradient-danger btn-xs text-white">
-                                                Delete
-                                            </a>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th style="min-width:50px">1</th>
-                                        <th style="min-width:150px">Call of Duty</th>
-                                        <th style="min-width:50px">100</th>
-                                        <th style="min-width:100px">10000</th>
-                                        <th style="min-width:100px">Rp. 1000000</th>
-                                        <th style="min-width:25px">
-                                            <a href="" class="btn btn-block bg-gradient-danger btn-xs text-white">
-                                                Delete
-                                            </a>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th style="min-width:50px">1</th>
-                                        <th style="min-width:150px">Call of Duty</th>
-                                        <th style="min-width:50px">100</th>
-                                        <th style="min-width:100px">10000</th>
-                                        <th style="min-width:100px">Rp. 1000000</th>
-                                        <th style="min-width:25px">
-                                            <a href="" class="btn btn-block bg-gradient-danger btn-xs text-white">
-                                                Delete
-                                            </a>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th style="min-width:50px">1</th>
-                                        <th style="min-width:150px">Call of Duty</th>
-                                        <th style="min-width:50px">100</th>
-                                        <th style="min-width:100px">10000</th>
-                                        <th style="min-width:100px">Rp. 1000000</th>
-                                        <th style="min-width:25px">
-                                            <a href="" class="btn btn-block bg-gradient-danger btn-xs text-white">
-                                                Delete
-                                            </a>
-                                        </th>
-                                    </tr>
-
-                                </tbody>
-                            </table>
+                            <div id="cartList"></div>
                         </div>
                     </div>
                 </div>
@@ -265,6 +133,7 @@
 
             <div class="modal-body">
                 <!-- CONTENT HERE -->
+                <div id="tabelBarang"></div>
             </div>
 
             <div class="modal-footer justify-content-between">
@@ -286,11 +155,11 @@
 
             <div class="modal-body">
                 <!-- CONTENT HERE -->
+                <div id="tabelNota"></div>
+
             </div>
 
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -380,3 +249,5 @@
         </div>
     </div>
 </div>
+
+<script src="../assets/js/retur.js"></script>

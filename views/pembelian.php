@@ -44,7 +44,7 @@ $txId = $date . $num
                             <div class="form-group row">
                                 <label for="refrensi" class="col-sm-2 col-form-label">Refrensi</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="" name="" placeholder="Refrensi">
+                                    <input type="text" class="form-control" id="refrensi" name="" placeholder="Refrensi">
                                 </div>
                             </div>
                             <div class="form-group row">
