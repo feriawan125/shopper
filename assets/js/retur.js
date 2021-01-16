@@ -55,7 +55,7 @@ function getBarang() {
 function buildCartList() {
   let cartItems = [];
   let selector = document.getElementById("cartList");
-  let cols = ["Kode", "Nama Barang", "Kuantitas", "Harga Beli", "Subtotal"];
+  let cols = ["Kode", "Nama Barang", "Kuantitas", "Harga Beli", "Subtotal", "Aksi"];
   let headerRow = cols
   .map(col => `<th>${col}</th>`)
   .join("");
@@ -76,32 +76,16 @@ function buildCartList() {
 }
 function updateCartList(kode, namaBarang, kuantitas, hargaBeli) {
   kuantitas = parseInt(kuantitas);
-  hargaBeli = parseInt(hargaBeli)
+  hargaBeli = parseInt(hargaBeli);
+  txtTotal = document.getElementById('txtTotal');
   if(updateQty(kode, kuantitas, hargaBeli)){
     
   }else{
     let subtotal = hargaBeli * kuantitas;
-    cartItems.push({"Kode": `${kode}`, "Nama Barang": `${namaBarang}`, "Kuantitas": `${kuantitas}`, "Harga Beli": `${hargaBeli}`, "Subtotal": `${subtotal}`});
+    cartItems.push({"Kode": `${kode}`, "Nama Barang": `${namaBarang}`, "Kuantitas": `${kuantitas}`, "Harga Beli": `${hargaBeli}`, "Subtotal": `${subtotal}`, "Aksi": `<a href=\"#\" onclick=\"removeFromCart(${kode}); \" class=\"btn btn-block bg-gradient-danger btn-xs text-white\">Delete</a>`});
   }
-  let selector = document.getElementById("cartList");
-  let cols = ["Kode", "Nama Barang", "Kuantitas", "Harga Beli", "Subtotal"];
-  let headerRow = cols
-  .map(col => `<th>${col}</th>`)
-  .join("");
-  let rows = cartItems
-  .map(row => {
-    let tds = cols.map(col => `<td>${row[col]}</td>`).join("");
-    return `<tr class="cursor-pointer">${tds}</tr>`;
-  })
-  .join("");
 
-  $(function() {
-    $('#cart').DataTable({
-      "ordering": false,
-    });
-  });
-
-  selector.innerHTML = json2Table(headerRow, rows, "cart");
+  updateCart();
 }
 
 function updateQty(id, qty, hargaBeli) {
@@ -111,7 +95,6 @@ function updateQty(id, qty, hargaBeli) {
        cartItems[i].Kuantitas = parseInt(cartItems[i].Kuantitas) + parseInt(qty);
        cartItems[i].Subtotal = cartItems[i].Kuantitas * parseInt(hargaBeli);
        updated = true;
-       console.log(cartItems);
        break;
     }
   }
@@ -119,17 +102,17 @@ function updateQty(id, qty, hargaBeli) {
 }
 
 function addToCart() {
-  let kodeBarang = document.getElementById("kodeBarang").value;
-  let namaBarang = document.getElementById("namaBarang").value;
-  let hargaBeli = document.getElementById("hargaBeli").value;
-  let kuantitas = document.getElementById("kuantitas").value;
-  if (kuantitas > 0) {
-    if (kodeBarang != "") {
-      updateCartList(kodeBarang, namaBarang, kuantitas, hargaBeli);
-      kodeBarang = "";
-      namaBarang = "";
-      hargaBeli = "";
-      kuantitas = 1;
+  let kodeBarang = document.getElementById("kodeBarang");
+  let namaBarang = document.getElementById("namaBarang");
+  let hargaBeli = document.getElementById("hargaBeli");
+  let kuantitas = document.getElementById("kuantitas");
+  if (kuantitas.value > 0) {
+    if (kodeBarang.value != "") {
+      updateCartList(kodeBarang.value, namaBarang.value, kuantitas.value, hargaBeli.value);
+      kodeBarang.value = "";
+      namaBarang.value = "";
+      hargaBeli.value = "";
+      kuantitas.value = 1;
     }
   }
 }
@@ -186,4 +169,32 @@ function fillBarang(id, nama, harga) {
   hargaBeli.value = harga;
   $('#modal-barang').modal('hide')
 
+}
+function updateCart(aksi = true) {
+  let selector = document.getElementById("cartList");
+  let cols = [];
+  if (aksi) {
+    cols = ["Kode", "Nama Barang", "Kuantitas", "Harga Beli", "Subtotal", "Aksi"];
+  } else{
+    cols = ["Kode", "Nama Barang", "Kuantitas", "Harga Beli", "Subtotal"];
+  }
+  let headerRow = cols
+  .map(col => `<th>${col}</th>`)
+  .join("");
+  let rows = cartItems
+  .map(row => {
+    let tds = cols.map(col => `<td>${row[col]}</td>`).join("");
+    return `<tr class="cursor-pointer">${tds}</tr>`;
+  })
+  .join("");
+
+  $(function() {
+    $('#cart').DataTable({
+      "ordering": false,
+    });
+  });
+
+  txtTotal.innerHTML = new Intl.NumberFormat('id-ID', { maximumSignificantDigits: 3 }).format(cartItems.sum("Subtotal"));
+
+  selector.innerHTML = json2Table(headerRow, rows, "cart");
 }
