@@ -57,6 +57,7 @@ Authentication::isAdmin();
                         <select class="form-control" name="akses">
                             <option value="admin" id="akses" name="akses">admin</option>
                             <option value="staff" id="akses" name="akses">staff</option>
+                            <option value="kasir" id="akses" name="akses">kasir</option>
                         </select>
                     </div>
                 </div>

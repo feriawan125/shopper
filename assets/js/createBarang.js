@@ -10,7 +10,7 @@ formBarang.addEventListener("submit", (e) =>{
     if (xhr.readyState == 4 && xhr.status == 200) {
       if (xhr.responseText == 'Input Data Berhasil!') {
         swal('Sukses', 'Data barang sukses dibuat', 'success'); 
-        formBarang.reset();
+        goToPage('master/barang');
       }else{
         swal('Gagal', 'Data barang gagal dibuat', 'error'); 
       }

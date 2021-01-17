@@ -196,7 +196,7 @@ function getNotaPenjualan() {
     if (xhr.readyState == 4 && xhr.status == 200) {
       let myList =JSON.parse(xhr.responseText);
       let selector = document.getElementById("tabelNotaPenjualan");
-      let cols = Object.keys(myList[0]);
+      let cols = ["TanggalJual", "KodeJual", "TotalJual"];
       let headerRow = cols
       .map(col => `<th>${col}</th>`)
       .join("");

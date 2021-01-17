@@ -229,7 +229,7 @@ function getNota() {
     if (xhr.readyState == 4 && xhr.status == 200) {
       let myList =JSON.parse(xhr.responseText);
       let selector = document.getElementById("tabelNota");
-      let cols = Object.keys(myList[0]);
+      let cols = ["TanggalBeli", "KodeBeli", "KodePemasok", "TotalBeli"];
       let headerRow = cols
       .map(col => `<th>${col}</th>`)
       .join("");
@@ -240,9 +240,9 @@ function getNota() {
       })
       .join("");
   
-      selector.innerHTML = json2Table(headerRow, rows, "cart");
+      selector.innerHTML = json2Table(headerRow, rows, "tblNota");
       $(function() {
-        $('#cart').DataTable();
+        $('#tblNota').DataTable();
       });
     }
   }
@@ -272,7 +272,7 @@ function fillNota(kodePemasok, kodeBeli) {
   document.getElementById('txId').value = kodeBeli;
   getPemasokDetail(kodePemasok);
   getNotaDetail(kodeBeli);
-  $('#btnDelete').toggleClass("d-none");
+  $('#btnDelete').removeClass("d-none");
   $('#modal-nota').modal('hide');
 }
 

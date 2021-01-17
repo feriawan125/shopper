@@ -10,7 +10,7 @@ formPemasok.addEventListener("submit", (e) =>{
     if (xhr.readyState == 4 && xhr.status == 200) {
       if (xhr.responseText == 'Input Data Berhasil!') {
         swal('Sukses', 'Data pemasok sukses dibuat', 'success'); 
-        formPemasok.reset();
+        goToPage('master/pemasok');
       }else{
         swal('Gagal', 'Data pemasok gagal dibuat', 'error'); 
       }

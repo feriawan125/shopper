@@ -131,7 +131,7 @@ function getNotaBeli() {
     if (xhr.readyState == 4 && xhr.status == 200) {
       let myList =JSON.parse(xhr.responseText);
       let selector = document.getElementById("tabelNota");
-      let cols = Object.keys(myList[0]);
+      let cols = ["TanggalBeli", "KodeBeli", "KodePemasok", "TotalBeli"];
       let headerRow = cols
       .map(col => `<th>${col}</th>`)
       .join("");
@@ -161,7 +161,7 @@ function getNotaRetur() {
     if (xhr.readyState == 4 && xhr.status == 200) {
       let myList =JSON.parse(xhr.responseText);
       let selector = document.getElementById("tabelNotaRetur");
-      let cols = Object.keys(myList[0]);
+      let cols = ["TanggalRetur", "KodeRetur", "KodeBeli", "TotalRetur"];
       let headerRow = cols
       .map(col => `<th>${col}</th>`)
       .join("");

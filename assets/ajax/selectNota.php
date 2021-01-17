@@ -8,7 +8,7 @@ $data = json_decode(file_get_contents("php://input"));
 if (isset($data->{"action"})) {
   header('Content-Type: application/json');
   switch ($data -> {"action"}) {
-    case 'getNotaBeli':
+    case 'getNotaDetail':
       $kodeBeli = $data -> {'kodeBeli'};
       $query = "SELECT 	dbeli.KodeBarang AS Kode , dbeli.Kuantitas AS Kuantitas, dbeli.Subtotal AS Subtotal, barang.NamaBarang AS 'Nama Barang', dbeli.HargaBeli AS 'Harga Beli'
       FROM dbeli
