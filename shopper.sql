@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 17, 2021 at 12:56 PM
+-- Generation Time: Jan 17, 2021 at 09:18 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -363,7 +363,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `full_name`, `email`, `phone`, `role`, `username`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (16, 'Dimas Febrian', 'dimas99fe@gmail.com', '0811332778', 'admin', 'dimas99fe', '$2y$10$5fBvsH3nUBVtqL2oTTgiE.nPe7S3jyQek3G2b7y8AAYIAqEn9.tlS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2020-12-21 07:27:46', '2020-12-21 07:27:46', NULL),
 (18, 'Feriawan Taniwidjaja', 'ferimario6@gmail.com', '081283663278', 'admin', NULL, '$2y$10$1yQzBpI4yu5JMcJe2KwJW.H2csY9IhLFrCdnOotsHEFDzswIWwsrG', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL),
-(20, 'abc', 'abc@abc.com', '123321123', 'kasir', 'abc', '202cb962ac59075b964b07152d234b70', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL);
+(20, 'abc', 'abc@abc.com', '123321123', 'kasir', 'abc', '202cb962ac59075b964b07152d234b70', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL),
+(24, 'ghi', 'ghi@ghi.com', '031', 'admin', 'ghi', '202cb962ac59075b964b07152d234b70', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -447,7 +448,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `KodeBarang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `KodeBarang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `hbeli`
@@ -471,13 +472,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pemasok`
 --
 ALTER TABLE `pemasok`
-  MODIFY `KodePemasok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `KodePemasok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
