@@ -17,7 +17,8 @@ formPemasok.addEventListener("submit", (e) =>{
     }
   }
 
-  xhr.open("post", "../assets/ajax/createPemasok.php");
+  xhr.open("POST", "../assets/ajax/createPemasok.php");
+  xhr.setRequestHeader('token', getCookie('token'));
   xhr.send(formData);
 
 });

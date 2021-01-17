@@ -17,7 +17,8 @@ formPengguna.addEventListener("submit", (e) =>{
     }
   }
 
-  xhr.open("post", "../assets/ajax/createPengguna.php");
+  xhr.open("POST", "../assets/ajax/createPengguna.php");
+  xhr.setRequestHeader('token', getCookie('token'));
   xhr.send(formData);
 
 });
