@@ -131,8 +131,8 @@ $txId = $date . $num
             <div class="row no-print">
                 <div class="col-12">
                     <button type="button" class="btn btn-default float-right" style="margin-right: 5px; min-width:150px"><i class="fas fa-print"></i> Print</button>
-                    <button type="button" class="btn btn-danger float-right d-none" style="margin-right: 5px; min-width:150px" data-toggle="modal" data-target="#modal-hapus" id="btnDelete"><i class=" fas fa-search"></i> Hapus</button>
-                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px; min-width:150px" data-toggle="modal" data-target="#modal-simpanberhasil" id="btnSave" onclick="save();"><i class="fas fa-save"></i> Simpan </button>
+                    <button type="button" class="btn btn-danger float-right d-none" style="margin-right: 5px; min-width:150px" onclick="delNotaRetur();" id="btnDelete"><i class=" fas fa-search"></i> Hapus</button>
+                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px; min-width:150px" id="btnSave" onclick="save();"><i class="fas fa-save"></i> Simpan </button>
                     <button type="button" class="btn btn-warning float-right" style="margin-right: 5px; min-width:150px" data-toggle="modal" data-target="#modal-nota" onclick="getNotaRetur();"><i class=" fas fa-search"></i> Cari Nota</button>
                     <button type="button" class="btn btn-info float-right" style="margin-right: 5px; min-width:150px;" onclick="resetRetur();"><i class=" fas fa-redo"></i> Reset Form</button>
                 </div>
@@ -203,70 +203,6 @@ $txId = $date . $num
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="modal-simpanberhasil">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Success</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body">
-                <!-- CONTENT HERE -->
-                <h6>Penyimpanan Berhasil</h6>
-            </div>
-
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="modal-simpangagal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Failed</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body">
-                <!-- CONTENT HERE -->
-                <h6>Penyimpanan Gagal</h6>
-            </div>
-
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="modal-hapus">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Anda Yakin Mau Menghapus data ini ?</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body">
-                <!-- CONTENT HERE -->
-                <!-- SHOW DATA -->
-            </div>
-
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Yes</button>
             </div>
         </div>
     </div>
