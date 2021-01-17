@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 16, 2021 at 06:48 PM
+-- Generation Time: Jan 17, 2021 at 12:56 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -44,10 +44,10 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`KodeBarang`, `NamaBarang`, `StokBarang`, `HargaBeli`, `HargaJual`, `CreatedAt`, `UpdatedAt`, `Slug`) VALUES
-(10, 'Le Minerale 600ML ', -1, 2500, 3000, '2020-11-28 02:36:19', '2020-11-28 05:48:44', 'minerale600'),
-(12, 'Aqua 600ML', -2, 2000, 3000, '2020-11-29 06:32:44', '2020-11-29 06:32:44', 'aqua600'),
+(10, 'Le Minerale 600ML ', -6, 2500, 3000, '2020-11-28 02:36:19', '2020-11-28 05:48:44', 'minerale600'),
+(12, 'Aqua 600ML', -4, 2000, 3000, '2020-11-29 06:32:44', '2020-11-29 06:32:44', 'aqua600'),
 (16, 'abcd', -1, 12, 15, '2021-01-10 03:50:49', NULL, 'ewewq'),
-(18, 'qwewqe', 1, 123232, 21321, '2021-01-10 04:01:41', NULL, 'wqewqewqe');
+(18, 'qwewqe', 0, 123232, 21321, '2021-01-10 04:01:41', NULL, 'wqewqewqe');
 
 -- --------------------------------------------------------
 
@@ -71,9 +71,7 @@ INSERT INTO `dbeli` (`KodeBeli`, `KodeBarang`, `Kuantitas`, `HargaBeli`, `Subtot
 (202101164, 16, 1, 12, 12),
 (202101167, 10, 1, 2500, 2500),
 (202101168, 10, 1, 2500, 2500),
-(202101164, 16, 1, 12, 12),
-(202101171, 12, 1, 2000, 2000),
-(202101171, 18, 1, 123232, 123232);
+(202101164, 16, 1, 12, 12);
 
 --
 -- Triggers `dbeli`
@@ -107,11 +105,18 @@ DELIMITER ;
 
 CREATE TABLE `djual` (
   `KodeJual` int(11) NOT NULL,
-  `No` int(11) NOT NULL,
   `KodeBarang` int(11) NOT NULL,
+  `HargaJual` int(11) NOT NULL,
   `Kuantitas` int(11) NOT NULL,
   `Subtotal` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `djual`
+--
+
+INSERT INTO `djual` (`KodeJual`, `KodeBarang`, `HargaJual`, `Kuantitas`, `Subtotal`) VALUES
+(202101171, 10, 3000, 4, 12000);
 
 --
 -- Triggers `djual`
@@ -137,12 +142,19 @@ DELIMITER ;
 
 CREATE TABLE `dretur` (
   `KodeRetur` int(11) NOT NULL,
-  `No` int(11) NOT NULL,
-  `KodeBeli` int(11) NOT NULL,
   `KodeBarang` int(11) NOT NULL,
   `Kuantitas` int(11) NOT NULL,
+  `HargaBeli` int(11) NOT NULL,
   `Subtotal` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dretur`
+--
+
+INSERT INTO `dretur` (`KodeRetur`, `KodeBarang`, `Kuantitas`, `HargaBeli`, `Subtotal`) VALUES
+(202101171, 10, 1, 2500, 2500),
+(202101172, 12, 1, 2000, 2000);
 
 --
 -- Triggers `dretur`
@@ -191,8 +203,7 @@ CREATE TABLE `hbeli` (
 INSERT INTO `hbeli` (`TanggalBeli`, `KodeBeli`, `TotalBeli`, `KodePengguna`, `KodePemasok`, `Refrensi`, `void`) VALUES
 ('2021-01-16 14:37:21', 202101164, 12, 18, 1, '', 1),
 ('2021-01-16 15:05:17', 202101167, 2500, 16, 1, '', 0),
-('2021-01-16 15:19:21', 202101168, 2500, 16, 1, '', 0),
-('2021-01-16 17:47:50', 202101171, 125232, 18, 3, '', 0);
+('2021-01-16 15:19:21', 202101168, 2500, 16, 1, '', 0);
 
 --
 -- Triggers `hbeli`
@@ -211,11 +222,19 @@ DELIMITER ;
 --
 
 CREATE TABLE `hjual` (
-  `TanggalJual` datetime NOT NULL,
+  `TanggalJual` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `KodeJual` int(11) NOT NULL,
   `TotalJual` double NOT NULL,
-  `KodePengguna` int(11) NOT NULL
+  `KodePengguna` int(11) NOT NULL,
+  `void` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `hjual`
+--
+
+INSERT INTO `hjual` (`TanggalJual`, `KodeJual`, `TotalJual`, `KodePengguna`, `void`) VALUES
+('2021-01-17 11:41:52', 202101171, 12000, 20, 1);
 
 --
 -- Triggers `hjual`
@@ -234,12 +253,21 @@ DELIMITER ;
 --
 
 CREATE TABLE `hretur` (
-  `TanggalRetur` date NOT NULL,
+  `TanggalRetur` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `KodeRetur` int(11) NOT NULL,
   `KodeBeli` int(11) NOT NULL,
   `TotalRetur` int(11) NOT NULL,
-  `KodePengguna` int(11) NOT NULL
+  `KodePengguna` int(11) NOT NULL,
+  `void` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `hretur`
+--
+
+INSERT INTO `hretur` (`TanggalRetur`, `KodeRetur`, `KodeBeli`, `TotalRetur`, `KodePengguna`, `void`) VALUES
+('2021-01-17 09:50:41', 202101171, 202101167, 2500, 18, 1),
+('2021-01-17 09:57:22', 202101172, 202101168, 2000, 18, 1);
 
 --
 -- Triggers `hretur`
@@ -335,7 +363,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `full_name`, `email`, `phone`, `role`, `username`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (16, 'Dimas Febrian', 'dimas99fe@gmail.com', '0811332778', 'admin', 'dimas99fe', '$2y$10$5fBvsH3nUBVtqL2oTTgiE.nPe7S3jyQek3G2b7y8AAYIAqEn9.tlS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2020-12-21 07:27:46', '2020-12-21 07:27:46', NULL),
 (18, 'Feriawan Taniwidjaja', 'ferimario6@gmail.com', '081283663278', 'admin', NULL, '$2y$10$1yQzBpI4yu5JMcJe2KwJW.H2csY9IhLFrCdnOotsHEFDzswIWwsrG', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL),
-(20, 'abc', 'abc@abc.com', '123321123', 'admin', 'abc', '202cb962ac59075b964b07152d234b70', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL);
+(20, 'abc', 'abc@abc.com', '123321123', 'kasir', 'abc', '202cb962ac59075b964b07152d234b70', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -359,7 +387,6 @@ ALTER TABLE `dbeli`
 -- Indexes for table `djual`
 --
 ALTER TABLE `djual`
-  ADD PRIMARY KEY (`KodeJual`,`No`),
   ADD KEY `KodeJual` (`KodeJual`,`KodeBarang`),
   ADD KEY `KodeBarang` (`KodeBarang`);
 
@@ -367,9 +394,7 @@ ALTER TABLE `djual`
 -- Indexes for table `dretur`
 --
 ALTER TABLE `dretur`
-  ADD PRIMARY KEY (`KodeRetur`,`No`),
-  ADD KEY `KodeRetur` (`KodeRetur`,`KodeBeli`,`KodeBarang`),
-  ADD KEY `KodeBeli` (`KodeBeli`),
+  ADD KEY `KodeRetur` (`KodeRetur`,`KodeBarang`),
   ADD KEY `KodeBarang` (`KodeBarang`);
 
 --
@@ -425,12 +450,6 @@ ALTER TABLE `barang`
   MODIFY `KodeBarang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `dretur`
---
-ALTER TABLE `dretur`
-  MODIFY `KodeRetur` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `hbeli`
 --
 ALTER TABLE `hbeli`
@@ -440,7 +459,7 @@ ALTER TABLE `hbeli`
 -- AUTO_INCREMENT for table `hjual`
 --
 ALTER TABLE `hjual`
-  MODIFY `KodeJual` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `KodeJual` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202101172;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -482,8 +501,7 @@ ALTER TABLE `djual`
 -- Constraints for table `dretur`
 --
 ALTER TABLE `dretur`
-  ADD CONSTRAINT `dretur_ibfk_1` FOREIGN KEY (`KodeRetur`) REFERENCES `hjual` (`KodeJual`),
-  ADD CONSTRAINT `dretur_ibfk_2` FOREIGN KEY (`KodeBeli`) REFERENCES `hbeli` (`KodeBeli`),
+  ADD CONSTRAINT `dretur_ibfk_2` FOREIGN KEY (`KodeRetur`) REFERENCES `hretur` (`KodeRetur`),
   ADD CONSTRAINT `dretur_ibfk_3` FOREIGN KEY (`KodeBarang`) REFERENCES `barang` (`KodeBarang`);
 
 --
