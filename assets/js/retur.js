@@ -282,3 +282,34 @@ function fillNotaRetur(kodeRetur, kodeBeli) {
 function resetRetur() {
   goToPage('retur');
 }
+function delNotaRetur() {
+  swal({
+    title: "Ada Yakin?",
+    text: "Data akan dihapus dan tidak dapat dikembalikan lagi!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      let kodeRetur = document.getElementById('txId');
+      var xhr = new XMLHttpRequest();
+
+      xhr.onreadystatechange = function (){
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          if (xhr.responseText == 'Delete Berhasil') {
+            swal('Sukses', 'Retur berhasil dihapus', 'success');
+            goToPage('pembelian');
+          }else{
+            swal('Gagal', 'Retur gagal dihapus', 'error');
+          }
+        }
+      }
+    
+      xhr.open("POST", "../assets/ajax/deleteRetur.php", true);
+      xhr.setRequestHeader('token', getCookie('token'));
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(JSON.stringify({kodeRetur: kodeRetur.value}));
+    }
+  });
+}
