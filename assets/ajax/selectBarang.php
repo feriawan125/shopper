@@ -2,7 +2,7 @@
 require_once '../../auth.php';
 include_once '../../config.php';
 Authentication::isAuth();
-Authentication::isStaff();
+Authentication::isKasir();
 $query = "SELECT KodeBarang, NamaBarang, StokBarang, HargaBeli, HargaJual, Slug FROM barang";
 $res = select($query);
 $data = mysqli_fetch_all($res, MYSQLI_ASSOC);

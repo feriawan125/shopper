@@ -153,11 +153,11 @@ $txId = $date . $num
             </div>
             <div class="row no-print">
                 <div class="col-12">
-                    <button type="button" class="btn btn-default float-right" style="margin-right: 5px; min-width:150px"><i class="fas fa-print"></i> Print</button>
-                    <button type="button" class="btn btn-danger float-right d-none" style="margin-right: 5px; min-width:150px" onclick="delNotaRetur();" id="btnDelete"><i class=" fas fa-search"></i> Hapus</button>
-                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px; min-width:150px" id="btnSave" onclick="save();"><i class="fas fa-save"></i> Simpan </button>
-                    <button type="button" class="btn btn-warning float-right" style="margin-right: 5px; min-width:150px" data-toggle="modal" data-target="#modal-nota" onclick="getNotaRetur();"><i class=" fas fa-search"></i> Cari Nota</button>
-                    <button type="button" class="btn btn-info float-right" style="margin-right: 5px; min-width:150px;" onclick="resetRetur();"><i class=" fas fa-redo"></i> Reset Form</button>
+                    <button type="button" class="btn btn-default float-right" style="margin-right: 5px; min-width:150px;"><i class="fas fa-print"></i> Print</button>
+                    <button type="button" class="btn btn-danger float-right d-none" style="margin-right: 5px; min-width:150px;"id="btnDelete" onclick="delNota();"><i class=" fas fa-search"></i> Hapus</button>
+                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px; min-width:150px;" onclick="save()"><i class=" fas fa-save"></i> Simpan </button>
+                    <button type="button" class="btn btn-warning float-right" style="margin-right: 5px; min-width:150px;" data-toggle="modal" data-target="#modal-nota" onclick="getNota();"><i class=" fas fa-search"></i> Cari Nota</button>
+                    <button type="button" class="btn btn-info float-right" style="margin-right: 5px; min-width:150px;" onclick="resetPembelian();"><i class=" fas fa-redo"></i> Reset Form</button>
                 </div>
             </div>
             <br>
