@@ -124,7 +124,7 @@ Array.prototype.sum = function (prop) {
   }
   return total
 }
-function getNota() {
+function getNotaBeli() {
   var xhr = new XMLHttpRequest();
 
   xhr.onreadystatechange = function (){
@@ -153,6 +153,36 @@ function getNota() {
   xhr.setRequestHeader('token', getCookie('token'));
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.send(JSON.stringify({action: "getNota"}));
+}
+function getNotaRetur() {
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function (){
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      let myList =JSON.parse(xhr.responseText);
+      let selector = document.getElementById("tabelNotaRetur");
+      let cols = Object.keys(myList[0]);
+      let headerRow = cols
+      .map(col => `<th>${col}</th>`)
+      .join("");
+      let rows = myList
+      .map(row => {
+        let tds = cols.map(col => '<td onclick=\"fillNotaRetur(' +`'${row['KodeRetur']}', '${row['KodeBeli']}'`+`)\">${row[col]}</td>`).join("");
+        return `<tr class="cursor-pointer">${tds}</tr>`;
+      })
+      .join("");
+  
+      selector.innerHTML = json2Table(headerRow, rows, "notaRetur");
+      $(function() {
+        $('#notaRetur').DataTable();
+      });
+    }
+  }
+
+  xhr.open("POST", "../assets/ajax/selectNota.php", true);
+  xhr.setRequestHeader('token', getCookie('token'));
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify({action: "getNotaRetur"}));
 }
 
 function fillNotaBeli(kodeBeli) {
@@ -197,4 +227,58 @@ function updateCart(aksi = true) {
   txtTotal.innerHTML = new Intl.NumberFormat('id-ID', { maximumSignificantDigits: 3 }).format(cartItems.sum("Subtotal"));
 
   selector.innerHTML = json2Table(headerRow, rows, "cart");
+}
+function save() {
+  let txId = document.getElementById('txId').value;
+  let kodeBeli = document.getElementById('notaBeli').value;
+  let total = cartItems.sum("Subtotal");
+  if (notaBeli !== "" && cartItems.length !== 0) {
+    var xhr = new XMLHttpRequest();
+  
+    xhr.onreadystatechange = function (){
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        if (xhr.responseText == 'Transaksi Berhasil') {
+          swal('Sukses', 'Transaksi berhasil', 'success'); 
+          goToPage('retur');
+        }else{
+          swal('Gagal', 'Transaksi gagal', 'error'); 
+        }
+      }
+    }
+  
+    xhr.open("POST", "../assets/ajax/insertRetur.php", true);
+    xhr.setRequestHeader('token', getCookie('token'));
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify({txId: txId, total: total, kodeBeli: kodeBeli, cart:cartItems}));
+    
+  }
+}
+
+function getNotaReturDetail(kodeRetur){
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function (){
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      let myList =JSON.parse(xhr.responseText);
+      cartItems = myList;
+      updateCart(false);
+    }
+  }
+
+  xhr.open("POST", "../assets/ajax/selectNota.php", true);
+  xhr.setRequestHeader('token', getCookie('token'));
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify({action: "getNotaReturDetail",kodeRetur: kodeRetur}));
+}
+function fillNotaRetur(kodeRetur, kodeBeli) {
+  document.getElementById('txId').value = kodeRetur;
+  document.getElementById('notaBeli').value = kodeBeli;
+  getNotaReturDetail(kodeRetur);
+  $('#btnDelete').toggleClass('d-none');
+  $('#btnSave').toggleClass('d-none');
+  $('#addItemGroup').toggleClass('d-none');
+  $('#modal-nota').modal('hide');
+}
+function resetRetur() {
+  goToPage('retur');
 }

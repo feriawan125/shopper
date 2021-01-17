@@ -39,7 +39,7 @@ $txId = $date . $num
                                     <input type="text" class="form-control" id="notaBeli" name="" placeholder="Kode Beli" disabled>
                                 </div>
                                 <div class="col-sm-2">
-                                    <button type="button" class="btn btn-block bg-gradient-secondary" onclick="getNota();" data-toggle="modal" data-target="#modal-notabeli">Cari</button>
+                                    <button type="button" class="btn btn-block bg-gradient-secondary" onclick="getNotaBeli();" data-toggle="modal" data-target="#modal-notabeli">Cari</button>
                                 </div>  
                             </div>
                             <div class="form-group row">
@@ -67,7 +67,7 @@ $txId = $date . $num
         <div class="container-fluid">
             <div class="row">
                 <!-- LEFT SIDE -->
-                <div class="col-4">
+                <div class="col-4" id="addItemGroup">
                     <div class="row invoice-info">
                         <div class="card-body">
                             <div class="form-group row">
@@ -117,7 +117,7 @@ $txId = $date . $num
                 </div><!-- /.container-fluid -->
 
                 <!-- RIGHT SIDE -->
-                <div class="col-8">
+                <div class="col">
                     <br>
                     <div class="card">
                         <div class="col-12">
@@ -131,9 +131,10 @@ $txId = $date . $num
             <div class="row no-print">
                 <div class="col-12">
                     <button type="button" class="btn btn-default float-right" style="margin-right: 5px; min-width:150px"><i class="fas fa-print"></i> Print</button>
-                    <button type="button" class="btn btn-danger float-right" style="margin-right: 5px; min-width:150px" data-toggle="modal" data-target="#modal-hapus"><i class=" fas fa-search"></i> Hapus</button>
-                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px; min-width:150px" data-toggle="modal" data-target="#modal-simpanberhasil"><i class="fas fa-save"></i> Simpan </button>
-                    <button type="button" class="btn btn-warning float-right" style="margin-right: 5px; min-width:150px" data-toggle="modal" data-target="#modal-nota"><i class=" fas fa-search"></i> Cari Nota</button>
+                    <button type="button" class="btn btn-danger float-right d-none" style="margin-right: 5px; min-width:150px" data-toggle="modal" data-target="#modal-hapus" id="btnDelete"><i class=" fas fa-search"></i> Hapus</button>
+                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px; min-width:150px" data-toggle="modal" data-target="#modal-simpanberhasil" id="btnSave" onclick="save();"><i class="fas fa-save"></i> Simpan </button>
+                    <button type="button" class="btn btn-warning float-right" style="margin-right: 5px; min-width:150px" data-toggle="modal" data-target="#modal-nota" onclick="getNotaRetur();"><i class=" fas fa-search"></i> Cari Nota</button>
+                    <button type="button" class="btn btn-info float-right" style="margin-right: 5px; min-width:150px;" onclick="resetRetur();"><i class=" fas fa-redo"></i> Reset Form</button>
                 </div>
             </div>
             <br>
@@ -195,6 +196,7 @@ $txId = $date . $num
             </div>
 
             <div class="modal-body">
+                <div id="tabelNotaRetur"></div>
                 <!-- CONTENT HERE -->
             </div>
 
