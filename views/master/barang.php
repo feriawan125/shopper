@@ -47,6 +47,7 @@ Authentication::isAdmin();
                         </tr>
                     </thead>
                     <tbody>
+                        <!-- MENGAMBIL DATA-->
                         <?php $query = "SELECT KodeBarang as 'Kode Barang', NamaBarang as 'Nama Barang', FORMAT(StokBarang,'2') as 'Stok Barang', FORMAT(HargaBeli,'2') as 'Harga Beli', FORMAT(HargaJual,'2') as 'Harga Jual' FROM barang";
                         $data = select($query);
                         foreach ($data as $row) : ?>

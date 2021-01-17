@@ -1,15 +1,16 @@
-<?php 
-    include_once 'config.php';
-    if (isset($_POST['register'])) {
-        $fullName = $_POST['fullname'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $password = $_POST['password'];
-        $hashed_pass = password_hash($password, PASSWORD_DEFAULT);
-        $namaTabel = array("full_name", "email", "phone", "password_hash");
-        $isiTabel = array("$fullName", "$email", "$phone", "$hashed_pass");
-        insert("users", $namaTabel, $isiTabel,"","");
-    }
+<!-- MENGINPUT KE DATABASE -->
+<?php
+include_once 'config.php';
+if (isset($_POST['register'])) {
+    $fullName = $_POST['fullname'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $password = $_POST['password'];
+    $hashed_pass = password_hash($password, PASSWORD_DEFAULT);
+    $namaTabel = array("full_name", "email", "phone", "password_hash");
+    $isiTabel = array("$fullName", "$email", "$phone", "$hashed_pass");
+    insert("users", $namaTabel, $isiTabel, "", "");
+}
 
 ?>
 
@@ -166,6 +167,7 @@
 
 
     <script>
+        //MENCOCOKAN PASSWORD
         var password = document.getElementById("password");
         var confirmpassword = document.getElementById("confirmpassword");
         var agreeTerms = document.getElementById("agreeTerms");
@@ -173,22 +175,23 @@
         var passOK = false;
         var checkOK = false;
 
-        confirmpassword.addEventListener('keyup', function () {
+        confirmpassword.addEventListener('keyup', function() {
             if (password.value == confirmpassword.value) {
                 confirmpassword.style.border = "1px solid green";
                 password.style.border = "1px solid green";
                 passOK = true;
-            }else{
+            } else {
                 confirmpassword.style.border = "1px solid red";
                 password.style.border = "1px solid red";
                 passOK = false;
             }
             buttonActivation();
         });
-        agreeTerms.addEventListener('change', function () {
+        // UNTUK AKTIVASI ATAU AGREEMENT DISETUJUI
+        agreeTerms.addEventListener('change', function() {
             if (agreeTerms.checked) {
                 checkOK = true;
-            }else{
+            } else {
                 checkOK = false;
             }
             buttonActivation();
@@ -197,11 +200,10 @@
         function buttonActivation() {
             if (checkOK && passOK) {
                 register.disabled = false;
-            }else{
+            } else {
                 register.disabled = true;
             }
         }
-
     </script>
 </body>
 

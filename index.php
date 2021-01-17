@@ -1,3 +1,4 @@
+<!-- MEMBACA AKSES DAN MENCOCOKAN USERNAME PASSWORD-->
 <?php
 include_once 'config.php';
 require 'auth.php';
@@ -18,13 +19,14 @@ if (isset($_POST['login'])) {
 <!DOCTYPE html>
 <html>
 
+<!-- IMPORT CSS -->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Shopper | Login</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -96,7 +98,7 @@ if (isset($_POST['login'])) {
 
                     <div class="text-center">
                         <p class="mb-1">
-                            <a href="views/forgot-password.php">I forgot my password</a>
+                            <a href="#">I forgot my password</a>
                         </p>
                         <p class="mb-0">
                             <a href="../shopper/register.php" class="text-center">Register a new membership</a>
